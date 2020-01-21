@@ -5,6 +5,6 @@
 void swap(int& luku1, int& luku2) {
         int a = luku2;
         int b = luku1;
-        luku1 = b;
-        luku2 = a;
+        luku1 = a;
+        luku2 = b;
 }

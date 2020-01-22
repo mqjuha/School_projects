@@ -4,21 +4,21 @@
 using namespace std;
 
 int kirjain_tarkastelu(string merkkijono) {
-    char loytyko;
+    long unsigned int loytyko;
 
     for ( char kirjain ='a'; kirjain <= 'z'; ++kirjain ) {
         loytyko = merkkijono.find(kirjain);
         if ( loytyko == string::npos) {
-            return false;
+            return 1;
         }
-    }
+    } return 0;
 }
 
 int kirjain_tarkastelu_toisinpain(string jono) {
     char merkki;
     int laskuri = 0;
 
-    for (int indeksi = 0; indeksi < jono.length(); ++indeksi) {
+    for (unsigned long int indeksi = 0; indeksi < jono.length(); ++indeksi) {
         merkki = jono.at(indeksi);
 
         for ( char kirjain ='a'; kirjain <= 'z'; ++kirjain ) {
@@ -30,8 +30,9 @@ int kirjain_tarkastelu_toisinpain(string jono) {
     } int maara = 0;
     maara = jono.length();
     if ( laskuri != maara) {
-        return false;
+        return 1;
     }
+    return 0;
 }
 
 int main()
@@ -43,11 +44,11 @@ int main()
     if ( avain.length() != 26 ) {
         cout << "Error! The encryption key must contain 26 characters." << endl;
     }
-    else if ( kirjain_tarkastelu_toisinpain(avain) == false ) {
+    else if ( kirjain_tarkastelu_toisinpain(avain) == 1 ) {
         cout << "Error! The encryption key must contain only lower case characters." << endl;
 
     }
-    else if (kirjain_tarkastelu(avain) == false) {
+    else if ( kirjain_tarkastelu(avain) == 1 ) {
         cout << "Error! The encryption key must contain all alphabets a-z." << endl;
 
     }
@@ -56,11 +57,11 @@ int main()
         cout << "Enter the text to be encrypted: ";
         cin >> teksti;
 
-        if ( kirjain_tarkastelu_toisinpain(teksti) == false) {
+        if ( kirjain_tarkastelu_toisinpain(teksti) == 1) {
             cout << "Error! The encryption key must contain only lower case characters." << endl;
         }
         else {
-            for (int indeksi = 0; indeksi < teksti.length(); ++indeksi) {
+            for (unsigned long int indeksi = 0; indeksi < teksti.length(); ++indeksi) {
                 char korvattava = teksti.at(indeksi);
 
                 int aakkosindeksi = 0;

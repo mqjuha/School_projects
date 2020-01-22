@@ -43,13 +43,16 @@ int main()
 
     if ( avain.length() != 26 ) {
         cout << "Error! The encryption key must contain 26 characters." << endl;
+        return EXIT_FAILURE;
     }
     else if ( kirjain_tarkastelu_toisinpain(avain) == 1 ) {
         cout << "Error! The encryption key must contain only lower case characters." << endl;
+        return EXIT_FAILURE;
 
     }
     else if ( kirjain_tarkastelu(avain) == 1 ) {
         cout << "Error! The encryption key must contain all alphabets a-z." << endl;
+        return EXIT_FAILURE;
 
     }
     else {
@@ -59,6 +62,7 @@ int main()
 
         if ( kirjain_tarkastelu_toisinpain(teksti) == 1) {
             cout << "Error! The encryption key must contain only lower case characters." << endl;
+            return EXIT_FAILURE;
         }
         else {
             for (unsigned long int indeksi = 0; indeksi < teksti.length(); ++indeksi) {

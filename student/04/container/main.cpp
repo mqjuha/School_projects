@@ -18,8 +18,8 @@ void read_integers(std::vector< int >& ints, int count)
 
 int same_values(std::vector<int> vektori) {
 
-    for ( long unsigned int vektorin_alkio : vektori ) {
-        if ( vektorin_alkio != vektori.at(0)) {
+    for ( int vektorin_alkio : vektori ) {
+        if ( vektorin_alkio != vektori.at(0) ) {
             return 0;
         }
     } return 1;

@@ -6,6 +6,29 @@
 // TODO: Implement split function here
 // Do not change main function
 
+std::vector<std::string> split(std::string merkkijono, char erottaja, int totuusarvo = 0) {
+
+    std::vector<std::string> vektori = { };
+    std::string jono = "";
+
+    for ( std::string::size_type indeksi = 0; indeksi < merkkijono.size(); ++indeksi) {
+
+        if ( merkkijono.at(indeksi) != erottaja ) {
+            jono += merkkijono.at(indeksi);
+        }
+        else {
+            vektori.push_back(jono);
+
+            jono = "";
+        }
+    } long unsigned int viimeinen = merkkijono.rfind(erottaja);
+    if ( viimeinen != merkkijono.size() -1) {
+        int pituus = merkkijono.size() - viimeinen;
+        vektori.push_back(merkkijono.substr(viimeinen + 1, pituus - 1));
+    } return vektori;
+
+}
+
 
 int main()
 {

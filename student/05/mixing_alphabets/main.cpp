@@ -20,7 +20,12 @@ int main()
         }
 
         // TODO: implement your solution here
-	
-        std::cout << word << std::endl;
+
+        if (word.size() > 4) {
+            std::shuffle(++word.begin(), --word.end(), generator);
+
+        }
+            std::cout << word << std::endl;
+
     }
 }

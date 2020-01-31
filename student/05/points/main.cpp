@@ -29,7 +29,7 @@ int main()
             int erottaja = rivi.find(":");
 
             string nimi = rivi.substr(0,erottaja);
-            int luku = rivi.substr(erottaja+1);
+            int luku = stoi(rivi.substr(erottaja+1));
 
             if ( pisteet.find(nimi) != pisteet.end() ) {
                 pisteet.at(nimi) += luku;

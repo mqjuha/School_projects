@@ -51,13 +51,22 @@ int is_arithmetic_series(std::vector<int> vektori) {
 
 int is_geometric_series(std::vector<int> vektori) {
 
-    int eka_jako = vektori.at(1) / vektori.at(0);
+    if ( vektori.at(0) == 0 ) {
+        return 0;
+    } else {
+        int eka_jako = vektori.at(1) / vektori.at(0);
 
-    for ( long unsigned int indeksi = 0; indeksi < ( vektori.size() - 1 ); ++indeksi) {
-        int jako = vektori.at(indeksi + 1) / vektori.at(indeksi);
-        if (eka_jako != jako) {
-            return 0;
-        }
+        for ( long unsigned int indeksi = 0; indeksi < ( vektori.size() - 1 ); ++indeksi) {
+
+
+                int jako = vektori.at(indeksi + 1) / vektori.at(indeksi);
+                if (eka_jako != jako) {
+                    return 0;
+
+            }
+
+    }
+
     } return 1;
 }
 

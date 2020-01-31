@@ -21,11 +21,11 @@ int main()
 
         // TODO: implement your solution here
 
-        if (word.size() > 4) {
+        if (word.size() > 3) {
             std::shuffle(++word.begin(), --word.end(), generator);
 
         }
-            std::cout << word << std::endl;
+        std::cout << word << std::endl;
 
     }
 }

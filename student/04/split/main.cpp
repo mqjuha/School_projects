@@ -32,11 +32,8 @@ std::vector<std::string> split(std::string merkkijono, char erottaja, bool totuu
             }
 
         }
-    } long unsigned int viimeinen = merkkijono.rfind(erottaja);
-    if ( viimeinen != merkkijono.size() -1) {
-        int pituus = merkkijono.size() - viimeinen;
-        vektori.push_back(merkkijono.substr(viimeinen + 1, pituus - 1));
-    }
+
+    }vektori.push_back(jono);
     return vektori;
 
 }

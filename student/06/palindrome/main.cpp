@@ -12,10 +12,10 @@ bool palindrome_recursive(std::string s)
 
 
   // Add your implementation here
-  int kirjainten_maara = s.size();
-  int keskikohta = kirjainten_maara / 2;
+  unsigned int kirjainten_maara = s.size();
+  unsigned int keskikohta = kirjainten_maara / 2;
 
-  for ( std::string::size_type index = 0 ; index < keskikohta; ++index) {
+  for ( unsigned int index = 0 ; index < keskikohta; ++index) {
       if (s.at(index) != s.at(kirjainten_maara - 1 - index)) {
           return false;
       }

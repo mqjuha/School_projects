@@ -13,7 +13,19 @@ void print_vertical(unsigned int num)
 
     // Add your implementation here
     //std::cout << num << endl;
-    if (num > 0) {
+    unsigned jakaja = 10;
+    unsigned jakojaannos = 0;
+    unsigned numero;
+
+    if (num > 10) {
+        numero = num / jakaja;
+        jakojaannos = num % jakaja;
+        print_vertical(numero);
+        cout << jakojaannos << endl;
+    }
+    else {
+        cout << num << endl;
+    }
 
 
 }

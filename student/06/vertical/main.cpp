@@ -11,8 +11,11 @@ void print_vertical(unsigned int num)
     // Do not remove RECURSIVE_FUNC declaration, it's necessary for automatic testing to work
     // ------------
 
-
     // Add your implementation here
+    //std::cout << num << endl;
+    if (num > 0) {
+
+
 }
 
 // Do not modify rest of the code, or the automated testing won't work.

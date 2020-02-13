@@ -20,7 +20,6 @@ bool palindrome_recursive(std::string s)
       if (s.at(alku) == s.at(loppu -1)) {
 
           s = s.substr(1, loppu-2);
-            std::cout << s << std::endl;
           return palindrome_recursive(s);
 
       } else {

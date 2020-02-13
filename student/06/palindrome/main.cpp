@@ -12,14 +12,25 @@ bool palindrome_recursive(std::string s)
 
 
   // Add your implementation here
-  unsigned int kirjainten_maara = s.size();
-  unsigned int keskikohta = kirjainten_maara / 2;
+  int alku = 0;
+  int loppu = s.size();
 
-  for ( unsigned int index = 0 ; index < keskikohta; ++index) {
-      if (s.at(index) != s.at(kirjainten_maara - 1 - index)) {
+  if (s.size() > 1) {
+
+      if (s.at(alku) == s.at(loppu -1)) {
+
+          s = s.substr(1, loppu-2);
+            std::cout << s << std::endl;
+          return palindrome_recursive(s);
+
+      } else {
+
           return false;
       }
-  } return true;
+
+  }
+  return true;
+
 }
 
 // Do not modify rest of the code, or the automated testing won't work.

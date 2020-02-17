@@ -2,10 +2,13 @@
 #include <fstream>
 #include <string>
 #include <vector>
+#include <map>
+
 
 const std::string HELP_TEXT = "S = store id1 i2\nP = print id\n"
                               "C = count id\nD = depth id\n";
 
+using NETWORK = std::map<std::string, std::vector<std::string>>;
 
 std::vector<std::string> split(const std::string& s, const char delimiter, bool ignore_empty = false){
     std::vector<std::string> result;
@@ -27,12 +30,64 @@ std::vector<std::string> split(const std::string& s, const char delimiter, bool 
     return result;
 }
 
+void store_n(NETWORK &n, std::string boss, std::string recruited) {
 
+    if (n.find(boss) == n.end()) {
+        n.insert({boss, std::vector<std::string>()});
+    }
+    n.at(boss).push_back(recruited);
+}
+
+void print_n(const NETWORK &n, std::string id, int depth) {
+
+    for (int i = 0; i < depth; ++i) {
+        std::cout << "..";
+    }
+    std::cout << id << std::endl;
+
+    if (n.find(id) != n.end()) {
+        for (auto person : n.at(id)) {
+            print_n(n, person, depth +1);
+        }
+    }
+}
+
+int depth_n(const NETWORK &n, std::string id){
+
+    int max_depth = 0;
+
+    if (n.find(id) != n.end()) {
+
+        for (auto person : n.at(id)) {
+            int the_depth_of_this_one = depth_n(n, person);
+
+            if (the_depth_of_this_one > max_depth) {
+                max_depth = the_depth_of_this_one;
+            }
+        }
+    }
+    return max_depth + 1;
+}
+
+int count_n(const NETWORK &n, std::string id) {
+
+    int amount = 0;
+
+    if (n.find(id) != n.end()) {
+
+        for (auto person : n.at(id)) {
+            ++ amount;
+            amount = count_n(n, person);
+        }
+    }
+    return amount;
+}
 
 int main()
 {
     // TODO: Implement the datastructure here
 
+    std::map<std::string, std::vector<std::string>> network;
 
     while(true){
         std::string line;
@@ -51,6 +106,8 @@ int main()
             std::string id2 = parts.at(2);
 
             // TODO: Implement the command here!
+            store_n(network, id1, id2);
+
 
         } else if(command == "P" or command == "p"){
             if(parts.size() != 2){
@@ -60,6 +117,7 @@ int main()
             std::string id = parts.at(1);
 
             // TODO: Implement the command here!
+            print_n(network, id, 0);
 
         } else if(command == "C" or command == "c"){
             if(parts.size() != 2){
@@ -69,6 +127,7 @@ int main()
             std::string id = parts.at(1);
 
             // TODO: Implement the command here!
+            std::cout << count_n(network, id) << std::endl;
 
         } else if(command == "D" or command == "d"){
             if(parts.size() != 2){
@@ -78,6 +137,7 @@ int main()
             std::string id = parts.at(1);
 
             // TODO: Implement the command here!
+            std::cout << depth_n(network, id);
 
         } else if(command == "Q" or command == "q"){
            return EXIT_SUCCESS;

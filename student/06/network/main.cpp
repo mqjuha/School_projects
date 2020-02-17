@@ -77,7 +77,7 @@ int count_n(const NETWORK &n, std::string id) {
 
         for (auto person : n.at(id)) {
             ++ amount;
-            amount = count_n(n, person);
+            amount += count_n(n, person);
         }
     }
     return amount;
@@ -137,7 +137,7 @@ int main()
             std::string id = parts.at(1);
 
             // TODO: Implement the command here!
-            std::cout << depth_n(network, id);
+            std::cout << depth_n(network, id) << std::endl;
 
         } else if(command == "Q" or command == "q"){
            return EXIT_SUCCESS;

@@ -38,4 +38,12 @@ void copy(int* itemptr, int* endptr, int* targetptr) {
 }
 void reverse(int* leftptr, int* rightptr){
 
+    for (int i = 1; leftptr < rightptr -i; ++i){
+
+        int a = *leftptr;
+        *leftptr = *(rightptr-i);
+        *(rightptr -i) = a;
+        ++ leftptr;
+    }
+
 }

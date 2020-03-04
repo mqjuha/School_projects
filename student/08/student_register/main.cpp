@@ -150,21 +150,15 @@ int main() {
                     Student* info = student_numbers.at(parts.at(1));
                     info->phone_number = phone_number;
 
-                    std::fstream file_object(file_name);
+                    std::ofstream file_object(file_name);
 
-                    std::string row = "";
-
-                    std::vector<std::string> file_parts = split(line, ';');
-
-                    while ( getline(file_object, row)) {
-                        if ( file_parts[0] == parts.at(1)) {
-                            file_object << file_parts[0] << ";" << file_parts[1] << ";" << file_parts[2]
-                                        << ";" << phone_number << ";" << file_parts[4] << ";" <<
-                                           file_parts[5] << std::endl;
-                        } else {
-                            file_object << row << std::endl;
-                        }
+                    for (auto pair : user_ids){
+                        const Student s = *(pair.second);
+                        file_object << s.student_number << ";" << s.user_id << ";" <<
+                                    s.name << ";" << s.phone_number << ";" << s.email << ";"
+                                    << s.skype << std::endl;
                     }
+
                     file_object.close();
                 }
             }

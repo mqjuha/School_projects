@@ -84,7 +84,8 @@ void Queue::print()
 {
     if(not is_green_){
         if(first_ == nullptr){
-            std::cout << "RED: No vehicles waiting in traffic lights";
+            std::cout << "RED: No vehicles waiting in traffic lights"
+                      << std::endl;
             return;
         }
         std::cout << "RED: Vehicle(s) ";

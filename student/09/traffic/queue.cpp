@@ -23,7 +23,7 @@ void Queue::enqueue(string reg)
 {
     if(is_green_){
         std::cout << "GREEN: The vehicle " << reg <<
-                     " need to stop to wait" << std::endl;
+                     " need not stop to wait" << std::endl;
         return;
     }
     if ( first_ == nullptr ) {

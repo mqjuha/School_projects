@@ -27,7 +27,7 @@ int main()
            string tekstirivi = "";
            int luku = 1;
 
-           while ( getline(tiedosto_olio, tekstirivi)) {
+           while ( getline(tiedosto_olio, tekstirivi )) {
                tiedosto_olio2 << luku << " " << tekstirivi << endl;
 
                luku += 1;

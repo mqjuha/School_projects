@@ -95,6 +95,6 @@ void Queue::print()
            std::cout << item_to_be_printed->reg_num << " " ;
            item_to_be_printed = item_to_be_printed->next;
         }
-        std::cout<< "waiting in traffic lights";
+        std::cout<< "waiting in traffic lights" << std::endl;
         }
 }

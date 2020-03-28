@@ -71,7 +71,7 @@ bool Cards::top_to_bottom(){
     Card_data* new_top = top_->next;
 
     Card_data* last = top_;
-    while(last->next->next != nullptr){
+    while(last->next->next || last->next != nullptr){
         last = last->next;
     }
 

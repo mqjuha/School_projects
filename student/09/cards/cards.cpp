@@ -43,7 +43,7 @@ bool Cards::remove(int& id){
 
 bool Cards::bottom_to_top(){
 
-    if (top_ == nullptr || top_->next== nullptr){
+    if (top_ == nullptr || top_->next == nullptr){
         return false;
     }
     Card_data* last = top_;

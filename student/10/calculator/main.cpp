@@ -122,7 +122,7 @@ int main() {
             }
         }
         if (not found){
-            cout << "Error: unknow command." << endl;
+            cout << "Error: unknown command." << endl;
         }
 
     }

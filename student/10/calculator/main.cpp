@@ -114,7 +114,7 @@ int main() {
                 double right = 0;
 
                 if (not(string_to_double(pieces.at(1), left) and string_to_double(pieces.at(2), right))){
-                    cout << "Error: a non-number operand.";
+                    cout << "Error: a non-number operand." << endl;
                     break;
                 }
                 cout << command.action(left, right) << endl;

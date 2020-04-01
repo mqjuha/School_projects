@@ -57,7 +57,10 @@ const vector<Command> COMMANDS = {
     {"STOP", 0, true, nullptr},
     {"QUIT", 0, true, nullptr},
     {"EXIT", 0, true, nullptr},
-    {"Q", 0, true, nullptr}
+    {"Q", 0, true, nullptr},
+    {"^", 2, false, power},
+    {"EXP", 2, false, power},
+    {"POWER", 2, false, power}
 };
 
 
@@ -88,6 +91,39 @@ int main() {
         string command_to_be_executed = pieces.at(0);
 
         // TODO: Implement command execution here!
+
+        for(auto& letter: command_to_be_executed){
+            letter = std::toupper(letter);
+        }
+
+        bool found = false;
+
+        for(auto command: COMMANDS){
+            if(command.str == command_to_be_executed){
+
+                found = true;
+                if(command.parameter_number != pieces.size() - 1){
+                   cout << "Error: wrong number of parameters." << endl;
+                   break;
+                }
+                if (command.exit){
+                    cout << GREETING_AT_END << endl;
+                    return EXIT_SUCCESS;
+                }
+                double left = 0;
+                double right = 0;
+
+                if (not(string_to_double(pieces.at(1), left) and string_to_double(pieces.at(2), right))){
+                    cout << "Error: a non-number operand.";
+                    break;
+                }
+                cout << command.action(left, right) << endl;
+                break;
+            }
+        }
+        if (not found){
+            cout << "Error: unknow command." << endl;
+        }
 
     }
 }

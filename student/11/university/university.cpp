@@ -1,7 +1,5 @@
 #include "university.hh"
 
-std::string ERROR_MESSAGE = "Error: Can't find anything that matches the given string: ";
-
 University::University():running_number_(111111)
 {
 }
@@ -106,7 +104,7 @@ void University::add_instance(Params params)
             std::cout << "Error: Instance already exists on this course." << std::endl;
         }
     } else {
-        std::cout << ERROR_MESSAGE, params.at(0) << std::endl;
+        std::cout << CANT_FIND << params.at(0) << std::endl;
     }
 }
 
@@ -130,12 +128,25 @@ void University::complete_course(Params params)
 
 void University::print_signups(Params params)
 {
+    if ( courses_.find(params.at(0)) == courses_.end() ){
+        std::cout << CANT_FIND << params.at(0) << std::endl;
 
+    } else {
+        courses_.at(params.at(0))->print_signups();
+    }
 }
 
+//KESKEN
 void University::print_study_state(Params params)
 {
+    if ( accounts_.find( params.at(2) ) != accounts_.end() ){
 
+        std::cout << "Current:" << std::endl;
+
+
+    } else {
+        std::cout << CANT_FIND << params.at(2) << std::endl;
+    }
 }
 
 void University::print_completed(Params params)
@@ -144,7 +155,7 @@ void University::print_completed(Params params)
         accounts_.at( params.at(2) )->print_completed();
 
     } else {
-        std::cout << ERROR_MESSAGE, params.at(2) << std::endl;
+        std::cout << CANT_FIND << params.at(2) << std::endl;
     }
 }
 
@@ -180,15 +191,15 @@ bool University::is_parameter_unknown(Params params)
                 return true;
 
             } else {
-                std::cout << ERROR_MESSAGE, params.at(2) << std::endl;
+                std::cout << CANT_FIND << params.at(2) << std::endl;
                 return false;
             }
         } else {
-            std::cout << ERROR_MESSAGE, params.at(1) << std::endl;
+            std::cout << CANT_FIND << params.at(1) << std::endl;
             return false;
         }
     } else {
-        std::cout << ERROR_MESSAGE, params.at(0) << std::endl;
+        std::cout << CANT_FIND << params.at(0) << std::endl;
         return false;
     }
 }

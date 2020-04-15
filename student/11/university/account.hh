@@ -47,6 +47,8 @@ public:
 
     void instance_completed(Instance* inst, Course* cours);
 
+    void print_completed();
+
 private:
     std::string full_name_;
     std::string last_name_;
@@ -55,6 +57,7 @@ private:
     const int account_number_;
     std::vector<Instance*> current_;
     std::vector<Course*> completed_;
+    int credits_;
 };
 
 #endif // ACCOUNT_HH

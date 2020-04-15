@@ -27,8 +27,11 @@ const std::string INDENT = "    ";
 class Instance
 {
 public:
-    Instance();
+    Instance(std::string name, Date date);
     bool is_possible_add_staff(Account* new_staff);
+    void print();
+    void print_students();
+    bool is_named(const std::string &name);
 
 private:
     std::string name_;

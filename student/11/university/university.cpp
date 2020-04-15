@@ -99,7 +99,8 @@ void University::add_instance(Params params)
 {
     if ( courses_.find( params.at(0) ) != courses_.end() ){
         if ( not courses_.at( params.at(0) )->has_instance( params.at(1)) ){
-            Instance* instance = new Instance( params.at(1), utils::today_ );
+            Date date = new utils::today;
+            Instance* instance = new Instance( params.at(1), date);
             courses_.at( params.at(0) )->new_instance(instance);
         } else {
             std::cout << "Error: Instance already exists on this course." << std::endl;
@@ -139,7 +140,12 @@ void University::print_study_state(Params params)
 
 void University::print_completed(Params params)
 {
+    if ( accounts_.find( params.at(2) ) != accounts_.end() ){
+        accounts_.at( params.at(2) )->print_completed();
 
+    } else {
+        std::cout << ERROR_MESSAGE, params.at(2) << std::endl;
+    }
 }
 
 void University::set_date(Params params)
@@ -186,3 +192,7 @@ bool University::is_parameter_unknown(Params params)
         return false;
     }
 }
+
+
+
+

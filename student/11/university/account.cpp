@@ -8,7 +8,8 @@ Account::Account(std::string full_name, std::string email, int account_number):
     last_name_(""),
     first_name_(""),
     email_(email),
-    account_number_(account_number)
+    account_number_(account_number),
+    credits_(0)
 {
     std::vector<std::string> name = utils::split(full_name_, ' ');
     last_name_ = name.back();
@@ -51,6 +52,14 @@ void Account::instance_completed(Instance *inst, Course *cours)
         ++ index;
     }
     std::cout << "No signups found on this instance." << std::endl;
+}
+
+void Account::print_completed()
+{
+    for ( Course* completed : completed_ ){
+        completed->print_info(true);
+    }
+    std::cout << "Total credits: " << credits_ << std::endl;
 }
 
 

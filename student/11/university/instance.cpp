@@ -4,7 +4,7 @@
 Instance::Instance(std::string name, Date date):
     name_(name),
     date_(date),
-    staff_({})
+    staff_()
 {
 
 }
@@ -31,3 +31,25 @@ bool Instance::is_possible_add_staff(Account *new_staff)
         return false;
     }
 }
+
+void Instance::print()
+{
+    std::cout << name_ << std::endl;
+    std::cout << "  Starting date: " << date_.print() << std::endl;
+    std::cout << "Amount of students: " << staff_.size() << std::endl;
+}
+
+void Instance::print_students()
+{
+    for ( Account* account : staff_ ){
+        std::cout << "  ";
+        account->print();
+    }
+}
+
+bool Instance::is_named(const std::string &name)
+{
+
+}
+
+

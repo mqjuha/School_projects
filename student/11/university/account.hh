@@ -45,6 +45,8 @@ public:
 
     void add_instance(Instance* new_instance);
 
+    void instance_completed(Instance* inst, Course* cours);
+
 private:
     std::string full_name_;
     std::string last_name_;

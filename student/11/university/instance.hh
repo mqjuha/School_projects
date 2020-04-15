@@ -29,6 +29,7 @@ class Instance
 public:
     Instance();
     bool is_possible_add_staff(Account* new_staff);
+
 private:
     std::string name_;
     Date date_;

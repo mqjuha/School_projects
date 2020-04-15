@@ -34,4 +34,23 @@ void Account::add_instance(Instance *new_instance)
     current_.push_back(new_instance);
 }
 
+void Account::instance_completed(Instance *inst, Course *cours)
+{
+    std::string::size_type index = 0;
+
+    // tarkistaa onko tyyppi kurssilla
+    for ( Instance* instance : current_ ){
+
+        if ( instance == inst ){
+            current_.erase(index);
+            completed_.push_back(cours);
+            std::cout << "Course completed" << std::endl;
+
+            return;
+        }
+        ++ index;
+    }
+    std::cout << "No signups found on this instance." << std::endl;
+}
+
 

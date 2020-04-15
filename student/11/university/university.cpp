@@ -1,5 +1,7 @@
 #include "university.hh"
 
+std::string ERROR_MESSAGE = "Error: Can't find anything that matches the given string: ";
+
 University::University():running_number_(111111)
 {
 }
@@ -95,22 +97,38 @@ void University::add_staff_to_course(Params params)
 
 void University::add_instance(Params params)
 {
-    if ( courses_.find(params.at(0)) != courses_.end() ){
+    if ( courses_.find( params.at(0) ) != courses_.end() ){
         if (not courses_.at( params.at(0) )->has_instance( params.at(1)) ){
-            Instance* instance = new Instance( params.at(1) );
+            Instance* instance = new Instance( params.at(1), utils::today_ );
             courses_.at( params.at(0) )->new_instance(instance);
-        }else{
+        } else {
             std::cout << "Error: Instance already exists on this course." << std::endl;
         }
     } else {
-        std::cout << "Error: Can't find anything that matches the given string: "
-                  << params.at(0) << std::endl;
+        std::cout << ERROR_MESSAGE, params.at(0) << std::endl;
     }
 }
 
 void University::sign_up_on_course(Params params)
 {
+    if ( courses_.find( params.at(0) ) != courses_.end() ){
+        if ( courses_.at( params.at(0) )->has_instance( params.at(1) )){
+            if ( accounts_.find( params.at(2) ) != accounts_.end() ){
+                Instance* inst = courses_.at( params.at(0) )->get_instance( params.at(1) );
+                if ( inst->is_possible_add_staff(accounts_.at( params.at(2) )) ){
+                    accounts_.at( params.at(2) )->add_instance(inst);
+                }
 
+
+            } else {
+                std::cout << ERROR_MESSAGE, params.at(2) << std::endl;
+            }
+        } else {
+            std::cout << ERROR_MESSAGE, params.at(1) << std::endl;
+        }
+    } else {
+        std::cout << ERROR_MESSAGE, params.at(0) << std::endl;   
+    }
 }
 
 void University::complete_course(Params params)

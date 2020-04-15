@@ -28,9 +28,11 @@ class Instance
 {
 public:
     Instance();
+    bool is_possible_add_staff(Account* new_staff);
 private:
     std::string name_;
-    std::vector<unsigned int> date_;
+    Date date_;
+    std::vector<Account*> staff_;   
 };
 
 #endif // INSTANCE_HH

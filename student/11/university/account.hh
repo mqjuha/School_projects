@@ -43,6 +43,8 @@ public:
      */
     std::string get_email();
 
+    void add_instance(Instance* new_instance);
+
 private:
     std::string full_name_;
     std::string last_name_;

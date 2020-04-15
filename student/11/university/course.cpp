@@ -74,7 +74,7 @@ void Course::new_instance(Instance *n_instance)
 bool Course::has_instance(const std::string &name)
 {
     for ( auto inst : instances_ ){
-        if ( inst->is_named(name)){
+        if ( inst->is_named(name) ){
             return true;
         }
     }

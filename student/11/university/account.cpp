@@ -28,3 +28,10 @@ std::string Account::get_email()
 {
     return email_;
 }
+
+void Account::add_instance(Instance *new_instance)
+{
+    current_.push_back(new_instance);
+}
+
+

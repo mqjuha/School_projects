@@ -45,6 +45,7 @@ void Account::instance_completed(Instance *inst, Course *cours)
         if ( instance == inst ){
             current_.erase(index);
             completed_.push_back(cours);
+            credits_ += 5;
             std::cout << "Course completed" << std::endl;
 
             return;
@@ -56,6 +57,22 @@ void Account::instance_completed(Instance *inst, Course *cours)
 
 void Account::print_completed()
 {
+    for ( Course* completed : completed_ ){
+        completed->print_info(true);
+    }
+    std::cout << "Total credits: " << credits_ << std::endl;
+}
+
+void Account::print_study_state()
+{
+    std::cout << "Current:" << std::endl;
+
+    for ( Instance* current : current_ ){
+        current->print_info();
+
+    }
+    std::cout << "Completed:" << std::endl;
+
     for ( Course* completed : completed_ ){
         completed->print_info(true);
     }

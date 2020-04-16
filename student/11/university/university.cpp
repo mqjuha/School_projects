@@ -98,7 +98,7 @@ void University::add_instance(Params params)
     if ( courses_.find( params.at(0) ) != courses_.end() ){
         if ( not courses_.at( params.at(0) )->has_instance( params.at(1)) ){
             Date date = new utils::today;
-            Instance* instance = new Instance( params.at(1), date);
+            Instance* instance = new Instance( params.at(1), date, courses_.at(params.at(0));
             courses_.at( params.at(0) )->new_instance(instance);
         } else {
             std::cout << "Error: Instance already exists on this course." << std::endl;
@@ -136,13 +136,10 @@ void University::print_signups(Params params)
     }
 }
 
-//KESKEN
 void University::print_study_state(Params params)
 {
     if ( accounts_.find( params.at(2) ) != accounts_.end() ){
-
-        std::cout << "Current:" << std::endl;
-
+        accounts_.at( params.at(2) )->print_study_state();
 
     } else {
         std::cout << CANT_FIND << params.at(2) << std::endl;

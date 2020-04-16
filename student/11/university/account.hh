@@ -49,6 +49,8 @@ public:
 
     void print_completed();
 
+    void print_study_state();
+
 private:
     std::string full_name_;
     std::string last_name_;

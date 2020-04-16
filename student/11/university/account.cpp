@@ -43,7 +43,7 @@ void Account::instance_completed(Instance *inst, Course *cours)
     for ( Instance* instance : current_ ){
 
         if ( instance == inst ){
-            current_.erase(index);
+            current_.erase(current_.begin()+index);
             completed_.push_back(cours);
             credits_ += 5;
             std::cout << "Course completed" << std::endl;

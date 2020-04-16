@@ -27,7 +27,7 @@ const std::string INDENT = "    ";
 class Instance
 {
 public:
-    Instance(std::string name, Date date, Course* course);
+    Instance(std::string name, Date* date, Course* course);
     bool is_possible_add_staff(Account* new_staff);
     void print();
     void print_students();
@@ -37,7 +37,7 @@ public:
 private:
     Course* course_;
     std::string name_;
-    Date date_;
+    Date* date_;
     std::vector<Account*> staff_;   
 };
 

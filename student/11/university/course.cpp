@@ -101,4 +101,9 @@ int Course::get_credits() const
     return credits_;
 }
 
+const std::string Course::get_name() const
+{
+    return name_;
+}
+
 

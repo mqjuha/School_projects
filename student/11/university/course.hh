@@ -99,6 +99,8 @@ public:
      */
     int get_credits() const;
 
+    const std::string get_name() const;
+
 private:
     std::string course_code_;
     std::string name_;

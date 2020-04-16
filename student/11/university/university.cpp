@@ -97,8 +97,12 @@ void University::add_instance(Params params)
 {
     if ( courses_.find( params.at(0) ) != courses_.end() ){
         if ( not courses_.at( params.at(0) )->has_instance( params.at(1)) ){
-            Date date = new utils::today;
-            Instance* instance = new Instance( params.at(1), date, courses_.at(params.at(0));
+
+            // aloituspäivän asentaminen
+            Date* date = new Date(utils::today.get_day(), utils::today.get_month(),
+                                 utils::today.get_year());
+
+            Instance* instance = new Instance( params.at(1), date, courses_.at(params.at(0)));
             courses_.at( params.at(0) )->new_instance(instance);
         } else {
             std::cout << "Error: Instance already exists on this course." << std::endl;
@@ -112,8 +116,8 @@ void University::sign_up_on_course(Params params)
 {
     if ( is_parameter_unknown(params) ){
         Instance* inst = courses_.at( params.at(0) )->get_instance( params.at(1) );
-        if ( inst->is_possible_add_staff( accounts_.at( params.at(2) )) ){
-        accounts_.at( params.at(2) )->add_instance( inst );
+        if ( inst->is_possible_add_staff( accounts_.at( std::stoi(params.at(2)) )) ){
+        accounts_.at( std::stoi(params.at(2)) )->add_instance( inst );
         }
     }
 }
@@ -121,7 +125,7 @@ void University::sign_up_on_course(Params params)
 void University::complete_course(Params params)
 {
     if ( is_parameter_unknown( params ) ){
-        accounts_.at( params.at(2) )->instance_completed(courses_.at( params.at(0) )
+        accounts_.at( std::stoi(params.at(2)) )->instance_completed(courses_.at( params.at(0) )
                                     ->get_instance( params.at(1) ), courses_.at(0) );
     }
 }
@@ -138,8 +142,8 @@ void University::print_signups(Params params)
 
 void University::print_study_state(Params params)
 {
-    if ( accounts_.find( params.at(2) ) != accounts_.end() ){
-        accounts_.at( params.at(2) )->print_study_state();
+    if ( accounts_.find( std::stoi(params.at(2)) ) != accounts_.end() ){
+        accounts_.at( std::stoi(params.at(2)) )->print_study_state();
 
     } else {
         std::cout << CANT_FIND << params.at(2) << std::endl;
@@ -148,8 +152,8 @@ void University::print_study_state(Params params)
 
 void University::print_completed(Params params)
 {
-    if ( accounts_.find( params.at(2) ) != accounts_.end() ){
-        accounts_.at( params.at(2) )->print_completed();
+    if ( accounts_.find( std::stoi(params.at(2)) ) != accounts_.end() ){
+        accounts_.at( std::stoi(params.at(2)) )->print_completed();
 
     } else {
         std::cout << CANT_FIND << params.at(2) << std::endl;
@@ -184,7 +188,7 @@ bool University::is_parameter_unknown(Params params)
 {
     if ( courses_.find( params.at(0) ) != courses_.end() ){
         if ( courses_.at( params.at(0) )->has_instance( params.at(1) )){
-            if ( accounts_.find( params.at(2) ) != accounts_.end() ){
+            if ( accounts_.find( std::stoi(params.at(2)) ) != accounts_.end() ){
                 return true;
 
             } else {

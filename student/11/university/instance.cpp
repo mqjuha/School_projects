@@ -1,7 +1,8 @@
 #include "instance.hh"
 #include "course.hh"
+#include "utils.hh"
 
-Instance::Instance(std::string name, Date date, Course* course):
+Instance::Instance(std::string name, Date* date, Course* course):
     course_(course),
     name_(name),
     date_(date),
@@ -21,8 +22,7 @@ bool Instance::is_possible_add_staff(Account *new_staff)
         }    
     }
     // ei voi ilmottautua aloituspäivämäärän jälkeen
-    Date obj;
-    if ( obj.operator <(date_) ){
+    if ( utils::today.operator <(*date_) || utils::today.operator == (*date_) ){
         staff_.push_back(new_staff);
         std::cout << "Signed up on the course instance." << std::endl;
 
@@ -38,7 +38,7 @@ bool Instance::is_possible_add_staff(Account *new_staff)
 void Instance::print()
 {
     std::cout << name_ << std::endl;
-    std::cout << INDENT << "Starting date: " << date_.print() << std::endl;
+    std::cout << INDENT << "Starting date: " << date_->print() << std::endl;
     std::cout << INDENT << "Amount of students: " << staff_.size() << std::endl;
 }
 
@@ -60,7 +60,7 @@ bool Instance::is_named(const std::string &name)
 
 void Instance::print_info()
 {
-    std::cout << course_->get_code() << " : " << course_->name_
+    std::cout << course_->get_code() << " : " << course_->get_name()
               << " " << name_ << std::endl;
 }
 

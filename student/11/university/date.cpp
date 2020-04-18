@@ -72,8 +72,6 @@ bool Date::operator==(const Date &rhs) const
 
 bool Date::operator<(const Date &rhs) const
 {
-    std::cout << year_ * 10000 + month_ * 100 + day_ << std::endl;
-    std::cout << rhs.year_ * 10000 + rhs.month_ * 100 + rhs.day_ << std::endl;
     return (year_ * 10000 + month_ * 100 + day_ ) <
             ( rhs.year_ * 10000 + rhs.month_ * 100 + rhs.day_);
 }

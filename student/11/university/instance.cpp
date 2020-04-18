@@ -38,7 +38,9 @@ bool Instance::is_possible_add_staff(Account *new_staff)
 void Instance::print()
 {
     std::cout << name_ << std::endl;
-    std::cout << INDENT << "Starting date: " << date_->print() << std::endl;
+    std::cout << INDENT << "Starting date: ";
+    date_->print();
+    std::cout << std::endl;
     std::cout << INDENT << "Amount of students: " << staff_.size() << std::endl;
 }
 

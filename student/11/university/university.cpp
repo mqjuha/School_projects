@@ -125,14 +125,14 @@ void University::sign_up_on_course(Params params)
 void University::complete_course(Params params)
 {
     if ( is_parameter_unknown( params ) ){
-        accounts_.at( std::stoi(params.at(2)) )->instance_completed(courses_.at( params.at(0) )
-                                    ->get_instance( params.at(1) ), courses_.at(0) );
+        accounts_.at( std::stoi(params.at(2)) )->instance_completed( courses_.at(params.at(0))
+                                    ->get_instance( params.at(1) ), courses_.at(params.at(0) ) );
     }
 }
 
 void University::print_signups(Params params)
 {
-    if ( courses_.find(params.at(0)) == courses_.end() ){
+    if ( courses_.find( params.at(0) ) == courses_.end() ){
         std::cout << CANT_FIND << params.at(0) << std::endl;
 
     } else {
@@ -142,21 +142,21 @@ void University::print_signups(Params params)
 
 void University::print_study_state(Params params)
 {
-    if ( accounts_.find( std::stoi(params.at(2)) ) != accounts_.end() ){
-        accounts_.at( std::stoi(params.at(2)) )->print_study_state();
+    if ( accounts_.find( std::stoi(params.at(0)) ) != accounts_.end() ){
+        accounts_.at( std::stoi(params.at(0)) )->print_study_state();
 
     } else {
-        std::cout << CANT_FIND << params.at(2) << std::endl;
+        std::cout << CANT_FIND << params.at(0) << std::endl;
     }
 }
 
 void University::print_completed(Params params)
 {
-    if ( accounts_.find( std::stoi(params.at(2)) ) != accounts_.end() ){
-        accounts_.at( std::stoi(params.at(2)) )->print_completed();
+    if ( accounts_.find( std::stoi(params.at(0)) ) != accounts_.end() ){
+        accounts_.at( std::stoi(params.at(0)) )->print_completed();
 
     } else {
-        std::cout << CANT_FIND << params.at(2) << std::endl;
+        std::cout << CANT_FIND << params.at(0) << std::endl;
     }
 }
 

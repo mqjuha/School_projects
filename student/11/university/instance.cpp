@@ -41,6 +41,7 @@ void Instance::print()
     std::cout << INDENT << "Starting date: ";
     date_->print();
     std::cout << std::endl;
+
     std::cout << INDENT << "Amount of students: " << staff_.size() << std::endl;
 }
 

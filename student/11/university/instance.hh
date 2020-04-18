@@ -12,6 +12,7 @@
 
 #include "account.hh"
 #include "date.hh"
+#include "utils.hh"
 #include <vector>
 #include <iostream>
 #include <string>
@@ -28,7 +29,7 @@ class Instance
 {
 public:
     Instance(std::string name, Date* date, Course* course);
-    bool is_possible_add_staff(Account* new_staff);
+    bool is_possible_add_staff(Account* new_staff, Date* today);
     void print();
     void print_students();
     bool is_named(const std::string &name);

@@ -105,7 +105,7 @@ void University::add_instance(Params params)
             Instance* instance = new Instance( params.at(1), date, courses_.at(params.at(0)));
             courses_.at( params.at(0) )->new_instance(instance);
         } else {
-            std::cout << "Error: Instance already exists on this course." << std::endl;
+            std::cout << INSTANCE_EXISTS << std::endl;
         }
     } else {
         std::cout << CANT_FIND << params.at(0) << std::endl;
@@ -115,9 +115,14 @@ void University::add_instance(Params params)
 void University::sign_up_on_course(Params params)
 {
     if ( is_parameter_unknown(params) ){
+
         Instance* inst = courses_.at( params.at(0) )->get_instance( params.at(1) );
-        if ( inst->is_possible_add_staff( accounts_.at( std::stoi(params.at(2)) )) ){
-        accounts_.at( std::stoi(params.at(2)) )->add_instance( inst );
+        Date* today = new Date(utils::today.get_day(), utils::today.get_month(),
+                               utils::today.get_year());
+
+        if ( inst->is_possible_add_staff( accounts_.at( std::stoi(params.at(2))), today ) ){
+
+            accounts_.at( std::stoi(params.at(2)) )->add_instance( inst );
         }
     }
 }

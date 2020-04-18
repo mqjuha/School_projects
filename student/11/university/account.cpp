@@ -46,13 +46,13 @@ void Account::instance_completed(Instance *inst, Course *cours)
             current_.erase(current_.begin()+index);
             completed_.push_back(cours);
             credits_ += 5;
-            std::cout << "Course completed" << std::endl;
+            std::cout << COMPLETED << std::endl;
 
             return;
         }
         ++ index;
     }
-    std::cout << "No signups found on this instance." << std::endl;
+    std::cout << NO_SIGNUPS << std::endl;
 }
 
 void Account::print_completed()

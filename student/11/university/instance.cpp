@@ -1,6 +1,5 @@
 #include "instance.hh"
 #include "course.hh"
-#include "utils.hh"
 
 Instance::Instance(std::string name, Date* date, Course* course):
     course_(course),
@@ -12,25 +11,22 @@ Instance::Instance(std::string name, Date* date, Course* course):
     staff_ = {};
 }
 
-bool Instance::is_possible_add_staff(Account *new_staff)
+bool Instance::is_possible_add_staff(Account *new_staff, Date *today)
 {
     for ( Account* staff : staff_ ){
         if ( staff == new_staff ) {
-            std::cout << "Error: Student has already registered on this course."
-                      << std::endl;
+            std::cout << ALREADY_REGISTERED << std::endl;
             return false;
         }    
     }
     // ei voi ilmottautua aloituspäivämäärän jälkeen
-    if ( utils::today.operator <(*date_) || utils::today.operator == (*date_) ){
+    if ( today->operator <(*date_) || today->operator == (*date_) ){
         staff_.push_back(new_staff);
         std::cout << "Signed up on the course instance." << std::endl;
-
         return true;
         
     } else {
-        std::cout << "Error: Can't sign up on instance after the starting date."
-                  << std::endl;
+        std::cout << LATE << std::endl;
         return false;
     }
 }

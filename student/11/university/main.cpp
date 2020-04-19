@@ -1,3 +1,18 @@
+/* University
+ *
+ * Desc:
+ *  This program saves universitys and students data.
+ *  Also searches univerity's, student's and course's information.
+ *
+ * Program author
+ * Name: Julia Harttunen
+ * Student number: 291740
+ * UserID: mqjuha
+ * E-Mail: julia.harttunen@tuni.fi
+ *
+ * */
+
+
 #include "utils.hh"
 #include "cli.hh"
 #include "university.hh"

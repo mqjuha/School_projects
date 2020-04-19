@@ -1,10 +1,17 @@
-/* Class: Account
-  * ----------
-  * Defines a student or a staff account in the university system.
-  *
-  * In the project, this class should be expanded to
-  * include study history of the account.
-  * */
+/* University
+ *
+ * Class: Account
+ * ----------
+ * Defines a student or a staff account in the university system.
+ *
+ * Program author
+ * Name: Julia Harttunen
+ * Student number: 291740
+ * UserID: mqjuha
+ * E-Mail: julia.harttunen@tuni.fi
+ *
+ * */
+
 #ifndef ACCOUNT_HH
 #define ACCOUNT_HH
 
@@ -20,6 +27,7 @@ class Course;
 const std::string NO_SIGNUPS = "No signups found on this instance.";
 const std::string SIGNED_UP = "Signed up on the course instance.";
 const std::string COMPLETED = "Course completed.";
+const int CREDIT = 5;
 
 class Account
 {

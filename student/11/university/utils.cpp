@@ -1,3 +1,11 @@
+/* University
+ *
+ * Class: Utils
+ *
+ * Notes: Code already exists and I haven't done anything
+ *
+ * */
+
 #include "utils.hh"
 
 std::vector<std::string> utils::split( std::string& str, char delim){

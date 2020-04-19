@@ -1,12 +1,16 @@
-/* Class: Date
+/* University
+ *
+ * Class: Date
  * ----------
  * TIE-02201/TIE-02207 SPRING 2020
  * ----------
  * Represents a single date, that can be compared and advanced
  * by a some number of days.
  *
- * Note: Students shouldn't need to make changes to this file.
+ * Note: I haven't done any changes to this file
+ *
  * */
+
 #ifndef DATE_HH
 #define DATE_HH
 

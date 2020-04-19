@@ -1,12 +1,21 @@
-/* Class: Instance
+/* University
+ *
+ * Class: Instance
  * ----------
  * TIE-02201/TIE-02207 SPRING 2020
  * ----------
  * Class that represent a single instance.
  *
- * Note: Students should make changes to this class, and add their info and
- * specifics of the class to this comment.
+ * Program author
+ * Name: Julia Harttunen
+ * Student number: 291740
+ * UserID: mqjuha
+ * E-Mail: julia.harttunen@tuni.fi
+ *
+ * Note: I have almost fully done this
+ *
  * */
+
 #ifndef INSTANCE_HH
 #define INSTANCE_HH
 

@@ -1,11 +1,12 @@
-/* Class: Cli
+/* University
+ *
+ * Class: Cli
  * ----------
  * TIE-02201/TIE-02207 SPRING 2020
  * ----------
  * Command line interface example with function pointers.
  *
- *
- * Note: Students shouldn't need to make changes to this file.
+ * Note: I haven't done any changes to this file.
  * */
 #ifndef CLI_HH
 #define CLI_HH

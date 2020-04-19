@@ -1,13 +1,23 @@
-/* Class: University
+/* University
+ *
+ * Class: University
  * ----------
  * TIE-02201/TIE-02207 SPRING 2020
  * ----------
  * Class that represents a simple university with students, staff and courses
  * with instances.
  *
- * Note: Students shouldn't need to make changes to the existing functions
- * or their implementations.
+ * Program author
+ * Name: Julia Harttunen
+ * Student number: 291740
+ * UserID: mqjuha
+ * E-Mail: julia.harttunen@tuni.fi
+ *
+ * Note: I haven't done any changes to the existing functions
+ * or their implementations. I have added few functions.
+ *
  * */
+
 #ifndef UNIVERSITY_HH
 #define UNIVERSITY_HH
 
@@ -151,7 +161,7 @@ public:
      */
     void advance_by_period(Params);
 
-    bool is_parameter_unknown(Params params);
+    bool is_parameter_known(Params params);
 
 
 private:

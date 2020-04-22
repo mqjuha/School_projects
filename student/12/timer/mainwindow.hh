@@ -23,10 +23,19 @@ public:
 
 private slots:
     // Add your slots here
+    void seconds_gone();
+    void stop_Button();
+    void on_startButton_clicked();
+
+    void on_resetButton_clicked();
+
+    void on_pushButton_4_clicked();
 
 private:
     Ui::MainWindow *ui;
     // Add other necessary members here
+    int minutes_;
+    int seconds_;
 };
 
 #endif // MAINWINDOW_HH

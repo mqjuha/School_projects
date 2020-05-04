@@ -5,6 +5,8 @@
 #include <QGraphicsScene>
 #include <random>
 
+using namespace std;
+
 namespace Ui {
 class MainWindow;
 }
@@ -21,6 +23,20 @@ private:
     Ui::MainWindow *ui;
 
     QGraphicsScene* scene_;
+    QGraphicsRectItem* tetromino_;
+
+    vector<vector<vector<int>>> allShapes = {
+            { { 0, 0 },   { 0, 1 },   { 0, 2 },   { 0, 3 } }, //suora
+            { { 0, 0 },  { 0, 1 },   { 1, 0 },  { 1, 1 } }, //neliö
+            { { 0, 0 },  { 0, 1 },   { 0, 2 },   { 1, 2 } }, //L
+            { { 0, 0 },  { 0, 1 },   { 0, 2 },   { 1, 0 } }, //L
+            { { 0, 1 },  { 0, 2 },   { 1, 1 },   { 1, 0 } }, //Z
+            { { 0, 0 },   { 0, 1 },   { 1, 1 },   { 1, 2 } }, //Z
+            { { 0, 0 },  { 0, 1 },  { 0, 2 },   { 1, 1 } }, //T
+        };
+    vector<QBrush> allColors = {Qt::cyan, Qt::yellow, Qt::blue,
+                                Qt::darkRed, Qt::green, Qt::red,
+                                Qt::magenta };
 
     // Constants describing scene coordinates
     // Copied from moving circle example and modified a bit
@@ -56,10 +72,12 @@ private:
 
 
     // For randomly selecting the next dropping tetromino
-    std::default_random_engine randomEng;
-    std::uniform_int_distribution<int> distr;
+    default_random_engine randomEng;
+    uniform_int_distribution<int> distr;
 
     // More constants, attibutes, and methods
+
+    void setShape();
 };
 
 #endif // MAINWINDOW_HH

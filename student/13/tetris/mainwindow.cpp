@@ -31,10 +31,12 @@ MainWindow::MainWindow(QWidget *parent) :
     // if its upper left corner is inside the sceneRect.
     scene_->setSceneRect(0, 0, BORDER_RIGHT - 1, BORDER_DOWN - 1);
 
+    setShape();
+
     // Setting random engine ready for the first real call.
     int seed = time(0); // You can change seed value for testing purposes
     randomEng.seed(seed);
-    distr = std::uniform_int_distribution<int>(0, NUMBER_OF_TETROMINOS - 1);
+    distr = uniform_int_distribution<int>(0, NUMBER_OF_TETROMINOS - 1);
     distr(randomEng); // Wiping out the first random number (which is almost always 0)
     // After the above settings, you can use randomEng to draw the next falling
     // tetromino by calling: distr(randomEng) in a suitable method.
@@ -45,5 +47,20 @@ MainWindow::MainWindow(QWidget *parent) :
 MainWindow::~MainWindow()
 {
     delete ui;
+}
+
+
+void MainWindow::setShape()
+{
+    int shape = distr(randomEng) % 8;
+    QBrush colorBrush(allColors.at(shape));
+    QPen grayPen(Qt::gray);
+    grayPen.setWidth(2);
+    for (int i = 0; i < 4 ; i++){
+        int x = allShapes.at(shape).at(i).at(0);
+        int y = allShapes.at(shape).at(i).at(1);
+        tetromino_ = scene_->addRect(SQUARE_SIDE*x, SQUARE_SIDE*y, SQUARE_SIDE, SQUARE_SIDE, grayPen, colorBrush);
+    }
+
 }
 

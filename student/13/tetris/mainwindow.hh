@@ -4,6 +4,9 @@
 #include <QMainWindow>
 #include <QGraphicsScene>
 #include <random>
+#include <QGraphicsRectItem>
+#include <QTimer>
+#include <vector>
 
 using namespace std;
 
@@ -18,25 +21,44 @@ class MainWindow : public QMainWindow
 public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
+    void keyPressEvent(QKeyEvent* event) override;
+
+private slots:
+    void on_startHardButton_clicked();
+
+    void on_startNormalButton_clicked();
+
+    void on_holdButton_clicked();
 
 private:
     Ui::MainWindow *ui;
 
     QGraphicsScene* scene_;
-    QGraphicsRectItem* tetromino_;
+    QGraphicsScene* scene2_;
+    QGraphicsRectItem* square_;
+    vector<QGraphicsRectItem*> tetromino_;
+    //vector<QGraphicsRectItem*> next_tetromino_;
+    vector<vector<qreal>> filled_boxes_;
 
+    int points_;
+
+    // Tetromino's shapes
     vector<vector<vector<int>>> allShapes = {
-            { { 0, 0 },   { 0, 1 },   { 0, 2 },   { 0, 3 } }, //suora
-            { { 0, 0 },  { 0, 1 },   { 1, 0 },  { 1, 1 } }, //neliö
-            { { 0, 0 },  { 0, 1 },   { 0, 2 },   { 1, 2 } }, //L
-            { { 0, 0 },  { 0, 1 },   { 0, 2 },   { 1, 0 } }, //L
-            { { 0, 1 },  { 0, 2 },   { 1, 1 },   { 1, 0 } }, //Z
-            { { 0, 0 },   { 0, 1 },   { 1, 1 },   { 1, 2 } }, //Z
-            { { 0, 0 },  { 0, 1 },  { 0, 2 },   { 1, 1 } }, //T
+            { { 0, 0 },   { 1, 0 },   { 2, 0 },   { 3, 0 } }, //suora
+            { { 0, 0 },  { 0, 1 },   { 1, 1 },  { 1, 0 } }, //neliö
+            { { 0, 0 },  { 0, 1 },   { 1, 0 },   { 2, 0 } }, //L sininen
+            { { 0, 0 },  { 1, 0 },   { 2, 0 },   { 2, 1 } }, //L tummapunan
+            { { 0, 0 },  { 1, 0 },   { 1, 1 },   { 2, 1 } }, //Z vihree
+            { { 1, 0 },   { 2, 0 },   { 1, 1 },   { 0, 2 } }, //Z punane
+            { { 0, 0 },  { 1, 0 },  { 2, 0 },   { 1, 1 } }, //T
         };
-    vector<QBrush> allColors = {Qt::cyan, Qt::yellow, Qt::blue,
+
+    // Tetromino's color
+    vector<QBrush> allColors = { Qt::cyan, Qt::yellow, Qt::blue,
                                 Qt::darkRed, Qt::green, Qt::red,
                                 Qt::magenta };
+
+    QTimer timer_;          // for continuous moving
 
     // Constants describing scene coordinates
     // Copied from moving circle example and modified a bit
@@ -77,7 +99,9 @@ private:
 
     // More constants, attibutes, and methods
 
-    void setShape();
+    void set_shape();
+
+    void tetromino_move();
 };
 
 #endif // MAINWINDOW_HH

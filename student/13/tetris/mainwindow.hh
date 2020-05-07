@@ -21,6 +21,7 @@ class MainWindow : public QMainWindow
 public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
+
     void keyPressEvent(QKeyEvent* event) override;
 
 private slots:
@@ -35,12 +36,15 @@ private:
 
     QGraphicsScene* scene_;
     QGraphicsScene* scene2_;
+
     QGraphicsRectItem* square_;
     vector<QGraphicsRectItem*> tetromino_;
-    //vector<QGraphicsRectItem*> next_tetromino_;
-    vector<vector<qreal>> filled_boxes_;
+
+    vector<vector<qreal>> taked_places_;
 
     int points_;
+    int minutes_;
+    int seconds_;
 
     // Tetromino's shapes
     vector<vector<vector<int>>> allShapes = {
@@ -49,7 +53,7 @@ private:
             { { 0, 0 },  { 0, 1 },   { 1, 0 },   { 2, 0 } }, //L sininen
             { { 0, 0 },  { 1, 0 },   { 2, 0 },   { 2, 1 } }, //L tummapunan
             { { 0, 0 },  { 1, 0 },   { 1, 1 },   { 2, 1 } }, //Z vihree
-            { { 1, 0 },   { 2, 0 },   { 1, 1 },   { 0, 2 } }, //Z punane
+            { { 1, 0 },   { 2, 0 },   { 1, 1 },   { 0, 1 } }, //Z punane
             { { 0, 0 },  { 1, 0 },  { 2, 0 },   { 1, 1 } }, //T
         };
 
@@ -73,6 +77,8 @@ private:
     const int COLUMNS = BORDER_RIGHT / SQUARE_SIDE;
     // Number of vertical cells (places for tetromino components)
     const int ROWS = BORDER_DOWN / SQUARE_SIDE;
+
+    const int STEP = 20;
 
     // Constants for different tetrominos and the number of them
     enum Tetromino_kind {HORIZONTAL,
@@ -102,6 +108,10 @@ private:
     void set_shape();
 
     void tetromino_move();
+
+    bool is_place_free(qreal deltaX, qreal deltaY);
+
+    void clock_time();
 };
 
 #endif // MAINWINDOW_HH

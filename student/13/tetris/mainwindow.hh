@@ -43,18 +43,19 @@ private:
     vector<vector<qreal>> taked_places_;
 
     int points_;
-    int minutes_;
-    int seconds_;
+    double minutes_;
+    double seconds_;
+    double clock_;
 
     // Tetromino's shapes
     vector<vector<vector<int>>> allShapes = {
-            { { 0, 0 },   { 1, 0 },   { 2, 0 },   { 3, 0 } }, //suora
-            { { 0, 0 },  { 0, 1 },   { 1, 1 },  { 1, 0 } }, //neliö
-            { { 0, 0 },  { 0, 1 },   { 1, 0 },   { 2, 0 } }, //L sininen
-            { { 0, 0 },  { 1, 0 },   { 2, 0 },   { 2, 1 } }, //L tummapunan
-            { { 0, 0 },  { 1, 0 },   { 1, 1 },   { 2, 1 } }, //Z vihree
-            { { 1, 0 },   { 2, 0 },   { 1, 1 },   { 0, 1 } }, //Z punane
-            { { 0, 0 },  { 1, 0 },  { 2, 0 },   { 1, 1 } }, //T
+            { { 80, 0 },   { 100, 0 },   { 120, 0 },   { 140, 0 } }, //suora
+            { { 100, 0 },  { 120, 0 },   { 100, 20 },  { 120, 20 } }, //neliö
+            { { 100, 0 },  { 120, 0 },   { 140, 0 },   { 100, 20 } }, //L sininen
+            { { 100, 0 },  { 120, 0 },   { 140, 0 },   { 140, 20 } }, //L tummapunan
+            { { 120, 0 },  { 140, 0 },   { 120, 20 },   { 100, 20 } }, //Z vihree
+            { { 100, 0 },   { 120, 0 },   { 120, 20 },   { 140, 20 } }, //Z punane
+            { { 100, 0 },  { 120, 0 },  { 140, 0 },   { 120, 20 } }, //T
         };
 
     // Tetromino's color

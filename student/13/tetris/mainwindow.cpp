@@ -7,12 +7,11 @@ MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow),
     points_(0),
-    minutes_(0),
-    seconds_(0)
+    minutes_(0.00),
+    seconds_(0.00),
+    clock_(0.00)
 {
     ui->setupUi(this);
-
-    //connect(timer_, SIGNAL(timeout()), this, SLOT(seconds_gone()));
 
     // We need a graphics scene in which to draw rectangles.
     scene_ = new QGraphicsScene(this);
@@ -41,13 +40,15 @@ MainWindow::MainWindow(QWidget *parent) :
     // if its upper left corner is inside the sceneRect.
     scene_->setSceneRect(0, 0, BORDER_RIGHT - 1, BORDER_DOWN - 1);
 
-    set_shape();
 
     // A non-singleshot timer fires every interval (1000) milliseconds,
     // which makes circle_move function to be called,
     // until the timer is stopped
     timer_.setSingleShot(false);
     connect(&timer_, &QTimer::timeout, this, &MainWindow::tetromino_move);
+
+    connect(&timer_, &QTimer::timeout, this, &MainWindow::clock_time);
+    ui->lcdNumberClock->setStyleSheet("background-color: cyan");
 
 
     // Setting random engine ready for the first real call.
@@ -70,31 +71,9 @@ void MainWindow::keyPressEvent(QKeyEvent *event)
 {
     // tetromino moves to the right
     if(event->key() == Qt::Key_N) { 
-        int can_move_right = 0;
         qreal deltaX = STEP;
         qreal deltaY = 0;
-        for ( QGraphicsRectItem* square : tetromino_ ){
-            if(scene_->sceneRect().contains(square->x() + deltaX, square->y()) && is_place_free(deltaX, deltaY)) {
-                can_move_right += 1;
-            }
-        } if ( can_move_right == 4 ){
-            tetromino_.at(0)->moveBy(deltaX, deltaY);
-            tetromino_.at(1)->moveBy(deltaX, deltaY);
-            tetromino_.at(2)->moveBy(deltaX, deltaY);
-            tetromino_.at(3)->moveBy(deltaX, deltaY);
-        }
-        return;
-    }
-    // tetromino moves to the left
-    if(event->key() == Qt::Key_V) {
-        int can_move_left = 0;
-        qreal deltaX = -STEP;
-        qreal deltaY = 0;
-        for ( QGraphicsRectItem* square : tetromino_ ){
-            if(scene_->sceneRect().contains(square->x() + deltaX, square->y()) && is_place_free(deltaX, deltaY)) {
-                can_move_left += 1;
-            }
-        } if ( can_move_left == 4 ){
+        if ( is_place_free(deltaX, deltaY) ) {
             tetromino_.at(0)->moveBy(deltaX, deltaY);
             tetromino_.at(1)->moveBy(deltaX, deltaY);
             tetromino_.at(2)->moveBy(deltaX, deltaY);
@@ -103,9 +82,17 @@ void MainWindow::keyPressEvent(QKeyEvent *event)
         return;
     }
 
-    // tetrimono goes straight down
-    // KESKEN
-    if(event->key() == Qt::Key_Space) {
+    // tetromino moves to the left
+    if(event->key() == Qt::Key_V) {
+        qreal deltaX = -STEP;
+        qreal deltaY = 0;
+        if ( is_place_free(deltaX, deltaY) ) {
+            tetromino_.at(0)->moveBy(deltaX, deltaY);
+            tetromino_.at(1)->moveBy(deltaX, deltaY);
+            tetromino_.at(2)->moveBy(deltaX, deltaY);
+            tetromino_.at(3)->moveBy(deltaX, deltaY);
+        }
+        return;
     }
 }
 
@@ -120,8 +107,7 @@ void MainWindow::set_shape()
     for (int i = 0; i < 4 ; i++){
         int x = allShapes.at(shape).at(i).at(0);
         int y = allShapes.at(shape).at(i).at(1);
-        square_ = scene_->addRect(SQUARE_SIDE*x+80, SQUARE_SIDE*y, SQUARE_SIDE,
-                                  SQUARE_SIDE, grayPen, colorBrush);
+        square_ = scene_->addRect(x, y, SQUARE_SIDE, SQUARE_SIDE, grayPen, colorBrush);
         tetromino_.push_back(square_);
     }
     // Pisteen saa jokaisesta uudesta palikasta
@@ -139,10 +125,10 @@ void MainWindow::tetromino_move()
     qreal current_y1 = tetromino_.at(1)->y();
     qreal current_y2 = tetromino_.at(2)->y();
     qreal current_y3 = tetromino_.at(3)->y();
-    qreal current_x = tetromino_.at(0)->x();
-    qreal current_x1 = tetromino_.at(1)->x();
-    qreal current_x2 = tetromino_.at(2)->x();
-    qreal current_x3 = tetromino_.at(3)->x();
+    //qreal current_x = tetromino_.at(0)->x();
+    //qreal current_x1 = tetromino_.at(1)->x();
+    //qreal current_x2 = tetromino_.at(2)->x();
+    //qreal current_x3 = tetromino_.at(3)->x();
     
     // Change in transition
     qreal deltaX = 0;
@@ -160,14 +146,19 @@ void MainWindow::tetromino_move()
         tetromino_.at(2)->moveBy(deltaX, deltaY);
         tetromino_.at(3)->moveBy(deltaX, deltaY);
     } else {
-        taked_places_.push_back( {current_x, (current_y - STEP)} );
-        taked_places_.push_back( {current_x1, (current_y1 - STEP)} );
-        taked_places_.push_back( {current_x2, (current_y2 - STEP)} );
-        taked_places_.push_back( {current_x3, (current_y3 - STEP)} );
+        for ( QGraphicsRectItem* square : tetromino_){
+            vector<qreal> coordinates = {};
+            coordinates.push_back((square->x()));
+            coordinates.push_back((square->y()));
+            taked_places_.push_back((coordinates));
+        }
+        //taked_places_.push_back( {current_x, (current_y - STEP)} );
+        //taked_places_.push_back( {current_x1, (current_y1 - STEP)} );
+        //taked_places_.push_back( {current_x2, (current_y2 - STEP)} );
+        //taked_places_.push_back( {current_x3, (current_y2 - STEP)} );
         tetromino_.clear();
         set_shape();
     }
-
 }
 
 // Function checks that is it possible to move the tetromino
@@ -192,27 +183,30 @@ bool MainWindow::is_place_free(qreal deltaX, qreal deltaY )
                  return false;
             }
         }
-    } return true;
+    }
+    return true;
 }
 
 void MainWindow::clock_time()
 {
-    ++seconds_;
+    seconds_ += 0.01;
 
-    if (seconds_ >= 60){
-        ++minutes_;
-        seconds_ = 0;
+    if (seconds_ >= 0.60){
+        ++ minutes_;
+        seconds_ = 0.00;
     }
-    //ui->lcdNumberSec->display(seconds_);
-    //ui->lcdNumberMin->display(minutes_);
+    clock_ = minutes_ + seconds_;
+    ui->lcdNumberClock->display(clock_);
+
 }
 
 // Tetrominos move faster than in normal game
 void MainWindow::on_startHardButton_clicked()
 {
-    timer_.start(300);
+    timer_.start(150);
     ui->startNormalButton->setDisabled(true);
     ui->startHardButton->setText("Continue Hard Game");
+    set_shape();
 }
 
 // Tetrominos move slower than in hard game
@@ -221,6 +215,7 @@ void MainWindow::on_startNormalButton_clicked()
     timer_.start(1000);
     ui->startHardButton->setDisabled(true);
     ui->startNormalButton->setText("Continue Normal Game");
+    set_shape();
 }
 
 // The tetromino stops and the holdButton can't be pressed until the nest tetromino

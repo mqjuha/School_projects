@@ -18,7 +18,7 @@
     <property name="geometry">
      <rect>
       <x>130</x>
-      <y>280</y>
+      <y>160</y>
       <width>171</width>
       <height>71</height>
      </rect>
@@ -81,7 +81,7 @@
      <rect>
       <x>470</x>
       <y>230</y>
-      <width>84</width>
+      <width>151</width>
       <height>28</height>
      </rect>
     </property>
@@ -110,6 +110,29 @@
     </property>
     <property name="text">
      <string>KELLO:</string>
+    </property>
+   </widget>
+   <widget class="QTextBrowser" name="gameOverBrowser">
+    <property name="geometry">
+     <rect>
+      <x>130</x>
+      <y>60</y>
+      <width>171</width>
+      <height>41</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="continueButton">
+    <property name="geometry">
+     <rect>
+      <x>470</x>
+      <y>270</y>
+      <width>151</width>
+      <height>28</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>CONTINUE</string>
     </property>
    </widget>
   </widget>

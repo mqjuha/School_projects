@@ -31,6 +31,8 @@ private slots:
 
     void on_holdButton_clicked();
 
+    void on_continueButton_clicked();
+
 private:
     Ui::MainWindow *ui;
 
@@ -63,6 +65,12 @@ private:
                                 Qt::magenta };
 
     QTimer timer_;          // for continuous moving
+    QTimer clock_timer_;
+
+    bool is_normal_;
+
+    const int NORMAL = 1000;
+    const int HARD = 500;
 
     // Constants describing scene coordinates
     // Copied from moving circle example and modified a bit
@@ -114,6 +122,8 @@ private:
     void clock_time();
 
     void create_grid();
+
+    bool is_game_over();
 };
 
 #endif // MAINWINDOW_HH

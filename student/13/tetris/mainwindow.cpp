@@ -61,7 +61,7 @@ MainWindow::MainWindow(QWidget *parent) :
     timer_.setSingleShot(false);
     connect(&timer_, &QTimer::timeout, this, &MainWindow::tetromino_move);
 
-    connect(&timer_, &QTimer::timeout, this, &MainWindow::clock_time);
+    connect(&clock_timer_, &QTimer::timeout, this, &MainWindow::clock_time);
     ui->lcdNumberClock->setStyleSheet("background-color: cyan");
 
 
@@ -109,24 +109,34 @@ void MainWindow::keyPressEvent(QKeyEvent *event)
 // Function draws and creates a new shape
 void MainWindow::set_shape()
 {
-    // The same shape always has the same color
-    int shape = distr(randomEng)%8;
-    QBrush colorBrush(allColors.at(shape));
-    QPen grayPen(Qt::gray);
-    grayPen.setWidth(2);
+    if ( is_game_over() ){
+        timer_.stop();
+        clock_timer_.stop();
+        ui->gameOverBrowser->setText("GAME OVER!!!");
+        //ui->gameOverBrowser->set(clock_);
 
-    for (int i = 0; i < 4 ; i++){
-        int x = allShapes.at(shape).at(i).at(0);
-        int y = allShapes.at(shape).at(i).at(1);
-        QGraphicsRectItem* piece = scene_->addRect(0, 0, SQUARE_SIDE, SQUARE_SIDE, grayPen, colorBrush);
-        piece->moveBy(x, y);
-        tetromino_.push_back(piece);
+    } else {
+        ui->gameOverBrowser->setText("GOOD LUCK!!!");
+
+        // The same shape always has the same color
+        int shape = distr(randomEng)%8;
+        QBrush colorBrush(allColors.at(shape));
+        QPen grayPen(Qt::gray);
+        grayPen.setWidth(2);
+
+        for (int i = 0; i < 4 ; i++){
+            int x = allShapes.at(shape).at(i).at(0);
+            int y = allShapes.at(shape).at(i).at(1);
+            QGraphicsRectItem* piece = scene_->addRect(0, 0, SQUARE_SIDE, SQUARE_SIDE, grayPen, colorBrush);
+            piece->moveBy(x, y);
+            tetromino_.push_back(piece);
+        }
+        // Pisteen saa jokaisesta uudesta palikasta
+        points_ += 1;
+        ui->pointsLabel->setNum(points_);
+        // vapautetaan hold nappi aina uuden palikan kohdalla
+        ui->holdButton->setDisabled(false);
     }
-    // Pisteen saa jokaisesta uudesta palikasta
-    points_ += 1;
-    ui->pointsLabel->setNum(points_);
-    // vapautetaan hold nappi aina uuden palikan kohdalla
-    ui->holdButton->setDisabled(false);
 }
 
 // The tetromino automatically moves downthe side of the square
@@ -199,33 +209,49 @@ void MainWindow::create_grid()
    vector<int> row;
 
    // asetetaan jokaiselle riville nolla
-   for ( int x = 0; x <= BORDER_RIGHT/STEP; ++x ){
+   for ( int x = 0; x <= BORDER_RIGHT/STEP; x++ ){
        row.push_back(0);
    }
    // rivejä ony-akselin verran
-   for ( int y = 0; y <= BORDER_DOWN/STEP; ++y ){
+   for ( int y = 0; y <= BORDER_DOWN/STEP; y++ ){
        grid_.push_back(row);
    }
+}
+
+bool MainWindow::is_game_over()
+{
+    for ( int alkio : grid_.at(0) ){
+        if ( alkio == 1 ){
+            return true;
+        }
+    }
+    return false;
 }
 
 // Tetrominos move faster than in normal game
 void MainWindow::on_startHardButton_clicked()
 {
-    timer_.start(150);
+    timer_.start(HARD);
+    clock_timer_.start(NORMAL);
+    is_normal_ = false;
     create_grid();
+    set_shape();
+
+    ui->startHardButton->setDisabled(true);
     ui->startNormalButton->setDisabled(true);
-    ui->startHardButton->setText("Continue Hard Game");
-    set_shape(); // ei voi olla tässä hold takia
 }
 
 // Tetrominos move slower than in hard game
 void MainWindow::on_startNormalButton_clicked()
 {
-    timer_.start(1000);
+    timer_.start(NORMAL);
+    clock_timer_.start(NORMAL);
+    is_normal_ = true;
     create_grid();
+    set_shape();
+
     ui->startHardButton->setDisabled(true);
-    ui->startNormalButton->setText("Continue Normal Game");
-    set_shape(); // ei voi olla tässä hold takia
+    ui->startNormalButton->setDisabled(true);
 }
 
 // The tetromino stops and the holdButton can't be pressed until the nest tetromino
@@ -236,3 +262,12 @@ void MainWindow::on_holdButton_clicked()
 }
 
 
+// This function continue game
+void MainWindow::on_continueButton_clicked()
+{
+    if ( is_normal_ ){
+        timer_.start(NORMAL);
+    } else {
+        timer_.start(HARD);
+    }
+}

@@ -37,10 +37,9 @@ private:
     QGraphicsScene* scene_;
     QGraphicsScene* scene2_;
 
-    QGraphicsRectItem* square_;
     vector<QGraphicsRectItem*> tetromino_;
 
-    vector<vector<qreal>> taked_places_;
+    vector<vector<int>> grid_;
 
     int points_;
     double minutes_;
@@ -113,6 +112,8 @@ private:
     bool is_place_free(qreal deltaX, qreal deltaY);
 
     void clock_time();
+
+    void create_grid();
 };
 
 #endif // MAINWINDOW_HH

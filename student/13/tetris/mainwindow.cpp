@@ -1,3 +1,17 @@
+/* Tetris
+ *
+ * Class: mainwindow
+ *
+ * Program author
+ * Name: Julia Harttunen
+ * Student number: 291740
+ * UserID: mqjuha
+ * E-Mail: julia.harttunen@tuni.fi
+ *
+ * Notes:
+ *
+ * */
+
 #include "mainwindow.hh"
 #include "ui_mainwindow.h"
 #include <QTimer>
@@ -15,7 +29,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     // We need a graphics scene in which to draw rectangles.
     scene_ = new QGraphicsScene(this);
-    scene2_ = new QGraphicsScene(this);
+   // scene2_ = new QGraphicsScene(this);
 
     // The graphicsView object is placed on the window
     // at the following coordinates, but if you want
@@ -31,8 +45,8 @@ MainWindow::MainWindow(QWidget *parent) :
                                   BORDER_RIGHT + 2, BORDER_DOWN + 2);
     ui->graphicsView->setScene(scene_);
 
-    ui->graphicsView_2->setGeometry(160, 10, 120 + 2, 120 + 2);
-    ui->graphicsView_2->setScene(scene2_);
+    //ui->graphicsView_2->setGeometry(160, 10, 120 + 2, 120 + 2);
+    //ui->graphicsView_2->setScene(scene2_);
 
     // The width of the scene_ is BORDER_RIGHT decreased by 1 and
     // the height of it is BORDER_DOWN decreased by 1, because
@@ -74,12 +88,10 @@ void MainWindow::keyPressEvent(QKeyEvent *event)
         qreal deltaX = STEP;
         qreal deltaY = 0;
         if ( is_place_free(deltaX, deltaY) ) {
-            tetromino_.at(0)->moveBy(deltaX, deltaY);
-            tetromino_.at(1)->moveBy(deltaX, deltaY);
-            tetromino_.at(2)->moveBy(deltaX, deltaY);
-            tetromino_.at(3)->moveBy(deltaX, deltaY);
+            for ( QGraphicsRectItem* piece : tetromino_ ){
+                piece->moveBy(deltaX, deltaY);
+            }
         }
-        return;
     }
 
     // tetromino moves to the left
@@ -87,12 +99,10 @@ void MainWindow::keyPressEvent(QKeyEvent *event)
         qreal deltaX = -STEP;
         qreal deltaY = 0;
         if ( is_place_free(deltaX, deltaY) ) {
-            tetromino_.at(0)->moveBy(deltaX, deltaY);
-            tetromino_.at(1)->moveBy(deltaX, deltaY);
-            tetromino_.at(2)->moveBy(deltaX, deltaY);
-            tetromino_.at(3)->moveBy(deltaX, deltaY);
+            for ( QGraphicsRectItem* piece : tetromino_ ){
+                piece->moveBy(deltaX, deltaY);
+            }
         }
-        return;
     }
 }
 
@@ -104,11 +114,13 @@ void MainWindow::set_shape()
     QBrush colorBrush(allColors.at(shape));
     QPen grayPen(Qt::gray);
     grayPen.setWidth(2);
+
     for (int i = 0; i < 4 ; i++){
         int x = allShapes.at(shape).at(i).at(0);
         int y = allShapes.at(shape).at(i).at(1);
-        square_ = scene_->addRect(x, y, SQUARE_SIDE, SQUARE_SIDE, grayPen, colorBrush);
-        tetromino_.push_back(square_);
+        QGraphicsRectItem* piece = scene_->addRect(0, 0, SQUARE_SIDE, SQUARE_SIDE, grayPen, colorBrush);
+        piece->moveBy(x, y);
+        tetromino_.push_back(piece);
     }
     // Pisteen saa jokaisesta uudesta palikasta
     points_ += 1;
@@ -119,46 +131,25 @@ void MainWindow::set_shape()
 
 // The tetromino automatically moves downthe side of the square
 void MainWindow::tetromino_move()
-{
-    // Current position of the tetromino
-    qreal current_y = tetromino_.at(0)->y();
-    qreal current_y1 = tetromino_.at(1)->y();
-    qreal current_y2 = tetromino_.at(2)->y();
-    qreal current_y3 = tetromino_.at(3)->y();
-    //qreal current_x = tetromino_.at(0)->x();
-    //qreal current_x1 = tetromino_.at(1)->x();
-    //qreal current_x2 = tetromino_.at(2)->x();
-    //qreal current_x3 = tetromino_.at(3)->x();
-    
+{   
     // Change in transition
-    qreal deltaX = 0;
-    qreal deltaY = STEP;
+    qreal deltaX = static_cast<qreal>(0);
+    qreal deltaY = static_cast<qreal>(STEP);
     
-    // New position of the tetromino
-    current_y += deltaY;
-    current_y1 += deltaY;
-    current_y2 += deltaY;
-    current_y3 += deltaY;
-
-    if ( is_place_free( deltaX, deltaY) && current_y < 400 && current_y1 < 400 && current_y2 < 400 && current_y3 < 400) {
-        tetromino_.at(0)->moveBy(deltaX, deltaY);
-        tetromino_.at(1)->moveBy(deltaX, deltaY);
-        tetromino_.at(2)->moveBy(deltaX, deltaY);
-        tetromino_.at(3)->moveBy(deltaX, deltaY);
-    } else {
-        for ( QGraphicsRectItem* square : tetromino_){
-            vector<qreal> coordinates = {};
-            coordinates.push_back((square->x()));
-            coordinates.push_back((square->y()));
-            taked_places_.push_back((coordinates));
+    if ( is_place_free(deltaX, deltaY) ){
+        for ( QGraphicsRectItem* piece : tetromino_ ){
+            piece->moveBy(deltaX, deltaY);
         }
-        //taked_places_.push_back( {current_x, (current_y - STEP)} );
-        //taked_places_.push_back( {current_x1, (current_y1 - STEP)} );
-        //taked_places_.push_back( {current_x2, (current_y2 - STEP)} );
-        //taked_places_.push_back( {current_x3, (current_y2 - STEP)} );
-        tetromino_.clear();
-        set_shape();
+        return;
     }
+    // jos ei pysty siirtää niin laitetaan griddiin ykkönen
+    for ( QGraphicsRectItem* piece : tetromino_ ){
+        int current_x = piece->x()/STEP;
+        int current_y = piece->y()/STEP;
+        grid_.at(current_y).at(current_x) = 1;
+    }
+    tetromino_.clear();
+    set_shape();
 }
 
 // Function checks that is it possible to move the tetromino
@@ -172,21 +163,25 @@ bool MainWindow::is_place_free(qreal deltaX, qreal deltaY )
 {
     // If the new position isn't already taked or isn't out of te scene
     // the tetromino can move
-    QRectF rect = scene_->sceneRect();
-    for ( vector<qreal> coordinate : taked_places_){
-        for ( QGraphicsRectItem* square : tetromino_){
-            qreal next_coordination_x = square->x() + deltaX;
-            qreal next_coordination_y = square->y() + deltaY;
-            if ( coordinate.at(0) == next_coordination_x && coordinate.at(1) == next_coordination_y){
-                return false;
-            } else if ( not rect.contains(next_coordination_x, next_coordination_y) ){
-                 return false;
-            }
+    for ( QGraphicsRectItem* piece : tetromino_ ){
+        qreal current_x = piece->x();
+        qreal current_y = piece->y();
+        int x = piece->x()/STEP;
+        int y = piece->y()/STEP;
+        current_x += deltaX;
+        current_y += deltaY;
+        y += 1;
+        if ( not scene_->sceneRect().contains(current_x, current_y) ){
+            return false;
+        }
+        if ( grid_.at(y).at(x) == 1){
+            return false;
         }
     }
     return true;
 }
 
+// Playing time clock and the clock is running as the pieces move
 void MainWindow::clock_time()
 {
     seconds_ += 0.01;
@@ -197,25 +192,40 @@ void MainWindow::clock_time()
     }
     clock_ = minutes_ + seconds_;
     ui->lcdNumberClock->display(clock_);
+}
 
+void MainWindow::create_grid()
+{
+   vector<int> row;
+
+   // asetetaan jokaiselle riville nolla
+   for ( int x = 0; x <= BORDER_RIGHT/STEP; ++x ){
+       row.push_back(0);
+   }
+   // rivejä ony-akselin verran
+   for ( int y = 0; y <= BORDER_DOWN/STEP; ++y ){
+       grid_.push_back(row);
+   }
 }
 
 // Tetrominos move faster than in normal game
 void MainWindow::on_startHardButton_clicked()
 {
     timer_.start(150);
+    create_grid();
     ui->startNormalButton->setDisabled(true);
     ui->startHardButton->setText("Continue Hard Game");
-    set_shape();
+    set_shape(); // ei voi olla tässä hold takia
 }
 
 // Tetrominos move slower than in hard game
 void MainWindow::on_startNormalButton_clicked()
 {
     timer_.start(1000);
+    create_grid();
     ui->startHardButton->setDisabled(true);
     ui->startNormalButton->setText("Continue Normal Game");
-    set_shape();
+    set_shape(); // ei voi olla tässä hold takia
 }
 
 // The tetromino stops and the holdButton can't be pressed until the nest tetromino
@@ -224,3 +234,5 @@ void MainWindow::on_holdButton_clicked()
     timer_.stop();
     ui->holdButton->setDisabled(true);
 }
+
+

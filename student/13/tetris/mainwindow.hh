@@ -33,6 +33,8 @@ private slots:
 
     void on_continueButton_clicked();
 
+    void on_newGameButton_clicked();
+
 private:
     Ui::MainWindow *ui;
 
@@ -67,7 +69,7 @@ private:
     QTimer timer_;          // for continuous moving
     QTimer clock_timer_;
 
-    bool is_normal_;
+    int speed_;
 
     const int NORMAL = 1000;
     const int HARD = 500;

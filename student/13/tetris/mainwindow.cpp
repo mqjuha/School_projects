@@ -29,13 +29,13 @@ MainWindow::MainWindow(QWidget *parent) :
 
     // We need a graphics scene in which to draw rectangles.
     scene_ = new QGraphicsScene(this);
-   // scene2_ = new QGraphicsScene(this);
 
     // The graphicsView object is placed on the window
     // at the following coordinates, but if you want
     // different placement, you can change their values.
     int left_margin = 100; // x coordinate
     int top_margin = 150; // y coordinate
+
 
     // The width of the graphicsView is BORDER_RIGHT added by 2,
     // since the borders take one pixel on each side
@@ -45,8 +45,6 @@ MainWindow::MainWindow(QWidget *parent) :
                                   BORDER_RIGHT + 2, BORDER_DOWN + 2);
     ui->graphicsView->setScene(scene_);
 
-    //ui->graphicsView_2->setGeometry(160, 10, 120 + 2, 120 + 2);
-    //ui->graphicsView_2->setScene(scene2_);
 
     // The width of the scene_ is BORDER_RIGHT decreased by 1 and
     // the height of it is BORDER_DOWN decreased by 1, because
@@ -84,7 +82,7 @@ MainWindow::~MainWindow()
 void MainWindow::keyPressEvent(QKeyEvent *event)
 {
     // tetromino moves to the right
-    if(event->key() == Qt::Key_N) { 
+    if ( event->key() == Qt::Key_N ) {
         qreal deltaX = STEP;
         qreal deltaY = 0;
         if ( is_place_free(deltaX, deltaY) ) {
@@ -95,10 +93,19 @@ void MainWindow::keyPressEvent(QKeyEvent *event)
     }
 
     // tetromino moves to the left
-    if(event->key() == Qt::Key_V) {
+    if ( event->key() == Qt::Key_V ) {
         qreal deltaX = -STEP;
         qreal deltaY = 0;
         if ( is_place_free(deltaX, deltaY) ) {
+            for ( QGraphicsRectItem* piece : tetromino_ ){
+                piece->moveBy(deltaX, deltaY);
+            }
+        }
+    }
+    if ( event->key() == Qt::Key_B ){
+        qreal deltaX = 0;
+        qreal deltaY = STEP;
+        while ( is_place_free(deltaX, deltaY) ){
             for ( QGraphicsRectItem* piece : tetromino_ ){
                 piece->moveBy(deltaX, deltaY);
             }
@@ -143,8 +150,8 @@ void MainWindow::set_shape()
 void MainWindow::tetromino_move()
 {   
     // Change in transition
-    qreal deltaX = static_cast<qreal>(0);
-    qreal deltaY = static_cast<qreal>(STEP);
+    qreal deltaX = 0;
+    qreal deltaY = STEP;
     
     if ( is_place_free(deltaX, deltaY) ){
         for ( QGraphicsRectItem* piece : tetromino_ ){
@@ -157,6 +164,12 @@ void MainWindow::tetromino_move()
         int current_x = piece->x()/STEP;
         int current_y = piece->y()/STEP;
         grid_.at(current_y).at(current_x) = 1;
+    }
+
+    // peli nopeutuu
+    if ( speed_ > 20 ){
+        speed_ -= 20;
+        timer_.start(speed_);
     }
     tetromino_.clear();
     set_shape();
@@ -220,7 +233,7 @@ void MainWindow::create_grid()
 
 bool MainWindow::is_game_over()
 {
-    for ( int alkio : grid_.at(0) ){
+    for ( int alkio : grid_.at(1) ){
         if ( alkio == 1 ){
             return true;
         }
@@ -231,9 +244,9 @@ bool MainWindow::is_game_over()
 // Tetrominos move faster than in normal game
 void MainWindow::on_startHardButton_clicked()
 {
-    timer_.start(HARD);
+    speed_ = HARD;
+    timer_.start(speed_);
     clock_timer_.start(NORMAL);
-    is_normal_ = false;
     create_grid();
     set_shape();
 
@@ -244,9 +257,9 @@ void MainWindow::on_startHardButton_clicked()
 // Tetrominos move slower than in hard game
 void MainWindow::on_startNormalButton_clicked()
 {
-    timer_.start(NORMAL);
+    speed_ = NORMAL;
+    timer_.start(speed_);
     clock_timer_.start(NORMAL);
-    is_normal_ = true;
     create_grid();
     set_shape();
 
@@ -264,9 +277,13 @@ void MainWindow::on_holdButton_clicked()
 // Function continue game
 void MainWindow::on_continueButton_clicked()
 {
-    if ( is_normal_ ){
-        timer_.start(NORMAL);
-    } else {
-        timer_.start(HARD);
-    }
+    timer_.start(speed_);
+}
+
+void MainWindow::on_newGameButton_clicked()
+{
+    scene_->clear();
+    clock_timer_.stop();
+    //points_ = 0;
+    ui->gameOverBrowser->setText("Choose which game you start!");
 }

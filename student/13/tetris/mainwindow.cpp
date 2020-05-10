@@ -261,8 +261,7 @@ void MainWindow::on_holdButton_clicked()
     ui->holdButton->setDisabled(true);
 }
 
-
-// This function continue game
+// Function continue game
 void MainWindow::on_continueButton_clicked()
 {
     if ( is_normal_ ){

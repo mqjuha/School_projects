@@ -38,11 +38,11 @@ public:
     void keyPressEvent(QKeyEvent* event) override;
 
 private slots:
-    void on_startHardButton_clicked();
-    void on_startNormalButton_clicked();
-    void on_holdButton_clicked();
-    void on_continueButton_clicked();
-    void on_newGameButton_clicked();
+    void on_start_hard_button_clicked();
+    void on_start_normal_button_clicked();
+    void on_hold_button_clicked();
+    void on_continue_button_clicked();
+    void on_new_game_button_clicked();
 
 private:
     Ui::MainWindow *ui;

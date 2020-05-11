@@ -24,7 +24,7 @@
      </rect>
     </property>
    </widget>
-   <widget class="QPushButton" name="startHardButton">
+   <widget class="QPushButton" name="start_hard_button">
     <property name="geometry">
      <rect>
       <x>540</x>
@@ -37,7 +37,7 @@
      <string> Start Hard Game</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="startNormalButton">
+   <widget class="QPushButton" name="start_normal_button">
     <property name="geometry">
      <rect>
       <x>380</x>
@@ -50,7 +50,7 @@
      <string>Start Normal Game</string>
     </property>
    </widget>
-   <widget class="QLabel" name="pointsLabel">
+   <widget class="QLabel" name="points_label">
     <property name="geometry">
      <rect>
       <x>550</x>
@@ -63,7 +63,7 @@
      <string>TextLabel</string>
     </property>
    </widget>
-   <widget class="QLabel" name="label_2">
+   <widget class="QLabel" name="points_label_2">
     <property name="geometry">
      <rect>
       <x>470</x>
@@ -76,7 +76,7 @@
      <string>PISTEET:</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="holdButton">
+   <widget class="QPushButton" name="hold_button">
     <property name="geometry">
      <rect>
       <x>380</x>
@@ -89,7 +89,7 @@
      <string>HOLD</string>
     </property>
    </widget>
-   <widget class="QLCDNumber" name="lcdNumberClock">
+   <widget class="QLCDNumber" name="lcd_number_clock">
     <property name="geometry">
      <rect>
       <x>550</x>
@@ -99,7 +99,7 @@
      </rect>
     </property>
    </widget>
-   <widget class="QLabel" name="label">
+   <widget class="QLabel" name="clock_label">
     <property name="geometry">
      <rect>
       <x>470</x>
@@ -112,17 +112,17 @@
      <string>KELLO:</string>
     </property>
    </widget>
-   <widget class="QTextBrowser" name="gameOverBrowser">
+   <widget class="QTextBrowser" name="game_over_browser">
     <property name="geometry">
      <rect>
       <x>130</x>
       <y>60</y>
       <width>171</width>
-      <height>41</height>
+      <height>51</height>
      </rect>
     </property>
    </widget>
-   <widget class="QPushButton" name="continueButton">
+   <widget class="QPushButton" name="continue_button">
     <property name="geometry">
      <rect>
       <x>540</x>
@@ -135,7 +135,7 @@
      <string>CONTINUE</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="newGameButton">
+   <widget class="QPushButton" name="new_game_button">
     <property name="geometry">
      <rect>
       <x>470</x>
@@ -148,7 +148,7 @@
      <string>Start New Game</string>
     </property>
    </widget>
-   <widget class="QTextBrowser" name="infoTextBrowser">
+   <widget class="QTextBrowser" name="info_text_browser">
     <property name="geometry">
      <rect>
       <x>360</x>

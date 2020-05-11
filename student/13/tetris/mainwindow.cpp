@@ -55,7 +55,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     // Time how long the game lasts
     connect(&clock_timer_, &QTimer::timeout, this, &MainWindow::clock_time);
-    ui->lcdNumberClock->setStyleSheet("background-color: cyan");
+    ui->lcd_number_clock->setStyleSheet("background-color: cyan");
 
     // Setting random engine ready for the first real call.
     int seed = time(0);
@@ -110,10 +110,10 @@ void MainWindow::set_shape()
     if ( is_game_over() ){
         timer_.stop();
         clock_timer_.stop();
-        ui->gameOverBrowser->setText("GAME OVER!!!");
+        ui->game_over_browser->setText("GAME OVER!!!");
 
     } else {
-        ui->gameOverBrowser->setText("GOOD LUCK!!!");
+        ui->game_over_browser->setText("GOOD LUCK!!!");
 
         // The same shape always has the same color
         int shape = distr(randomEng) % 8;
@@ -131,10 +131,10 @@ void MainWindow::set_shape()
 
         // The player gets a point for each new tetromino
         points_ += 1;
-        ui->pointsLabel->setNum(points_);
+        ui->points_label->setNum(points_);
 
         // Always release the holdButton for a new tetromino
-        ui->holdButton->setDisabled(false);
+        ui->hold_button->setDisabled(false);
     }
 }
 
@@ -204,7 +204,7 @@ void MainWindow::clock_time()
         seconds_ = 0.00;
     }
     clock_ = minutes_ + seconds_;
-    ui->lcdNumberClock->display(clock_);
+    ui->lcd_number_clock->display(clock_);
 }
 
 void MainWindow::create_grid()
@@ -234,7 +234,7 @@ bool MainWindow::is_game_over()
 }
 
 // Function starts a new hard game
-void MainWindow::on_startHardButton_clicked()
+void MainWindow::on_start_hard_button_clicked()
 {
     // Tetrominos move faster than in normal game
     speed_ = HARD;
@@ -243,12 +243,12 @@ void MainWindow::on_startHardButton_clicked()
     create_grid();
     set_shape();
 
-    ui->startHardButton->setDisabled(true);
-    ui->startNormalButton->setDisabled(true);
+    ui->start_hard_button->setDisabled(true);
+    ui->start_normal_button->setDisabled(true);
 }
 
 // Function starts a new normal game
-void MainWindow::on_startNormalButton_clicked()
+void MainWindow::on_start_normal_button_clicked()
 {
     // Tetrominos move slower than in hard game
     speed_ = NORMAL;
@@ -257,26 +257,26 @@ void MainWindow::on_startNormalButton_clicked()
     create_grid();
     set_shape();
 
-    ui->startHardButton->setDisabled(true);
-    ui->startNormalButton->setDisabled(true);
+    ui->start_hard_button->setDisabled(true);
+    ui->start_normal_button->setDisabled(true);
 }
 
 // The tetromino stops and the holdButton can't be pressed
 // until the next tetromino
-void MainWindow::on_holdButton_clicked()
+void MainWindow::on_hold_button_clicked()
 {
     timer_.stop();
-    ui->holdButton->setDisabled(true);
+    ui->hold_button->setDisabled(true);
 }
 
 // Function continue game after holdButton
-void MainWindow::on_continueButton_clicked()
+void MainWindow::on_continue_button_clicked()
 {
     timer_.start(speed_);
 }
 
 // Function clears the scene and allows a new game
-void MainWindow::on_newGameButton_clicked()
+void MainWindow::on_new_game_button_clicked()
 {
     scene_->clear();
     tetromino_.clear();
@@ -286,11 +286,11 @@ void MainWindow::on_newGameButton_clicked()
     minutes_ = 0.00;
     seconds_ = 0.00;
     clock_ = minutes_ + seconds_;
-    ui->lcdNumberClock->display(clock_);
-    ui->pointsLabel->setNum(points_);
-    ui->gameOverBrowser->setText("Choose which game you want start!");
+    ui->lcd_number_clock->display(clock_);
+    ui->points_label->setNum(points_);
+    ui->game_over_browser->setText("Choose which game you want start!");
 
-    ui->startHardButton->setDisabled(false);
-    ui->startNormalButton->setDisabled(false);
-    ui->holdButton->setDisabled(false);
+    ui->start_hard_button->setDisabled(false);
+    ui->start_normal_button->setDisabled(false);
+    ui->hold_button->setDisabled(false);
 }

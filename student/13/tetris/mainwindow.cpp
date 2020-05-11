@@ -8,8 +8,6 @@
  * UserID: mqjuha
  * E-Mail: julia.harttunen@tuni.fi
  *
- * Notes:
- *
  * */
 
 #include "mainwindow.hh"
@@ -20,22 +18,20 @@
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow),
-    points_(0),
     minutes_(0.00),
     seconds_(0.00),
-    clock_(0.00)
+    clock_(0.00),
+    points_(0)
 {
     ui->setupUi(this);
 
-    // We need a graphics scene in which to draw rectangles.
+    // A graphics scene in which to draw rectangles
     scene_ = new QGraphicsScene(this);
 
     // The graphicsView object is placed on the window
-    // at the following coordinates, but if you want
-    // different placement, you can change their values.
+    // at the following coordinates
     int left_margin = 100; // x coordinate
     int top_margin = 150; // y coordinate
-
 
     // The width of the graphicsView is BORDER_RIGHT added by 2,
     // since the borders take one pixel on each side
@@ -45,33 +41,27 @@ MainWindow::MainWindow(QWidget *parent) :
                                   BORDER_RIGHT + 2, BORDER_DOWN + 2);
     ui->graphicsView->setScene(scene_);
 
-
     // The width of the scene_ is BORDER_RIGHT decreased by 1 and
     // the height of it is BORDER_DOWN decreased by 1, because
     // each square of a tetromino is considered to be inside the sceneRect,
     // if its upper left corner is inside the sceneRect.
     scene_->setSceneRect(0, 0, BORDER_RIGHT - 1, BORDER_DOWN - 1);
 
-
-    // A non-singleshot timer fires every interval (1000) milliseconds,
-    // which makes circle_move function to be called,
+    // A non-singleshot timer fires every interval (speed_) milliseconds,
+    // which makes tetromino_move function to be called,
     // until the timer is stopped
     timer_.setSingleShot(false);
     connect(&timer_, &QTimer::timeout, this, &MainWindow::tetromino_move);
 
+    // Time how long the game lasts
     connect(&clock_timer_, &QTimer::timeout, this, &MainWindow::clock_time);
     ui->lcdNumberClock->setStyleSheet("background-color: cyan");
 
-
     // Setting random engine ready for the first real call.
-    int seed = time(0); // You can change seed value for testing purposes
+    int seed = time(0);
     randomEng.seed(seed);
     distr = uniform_int_distribution<int>(0, NUMBER_OF_TETROMINOS - 1);
-    distr(randomEng); // Wiping out the first random number (which is almost always 0)
-    // After the above settings, you can use randomEng to draw the next falling
-    // tetromino by calling: distr(randomEng) in a suitable method.
-
-    // Add more initial settings and connect calls, when needed.
+    distr(randomEng); // Wiping out the first random number
 }
 
 MainWindow::~MainWindow()
@@ -81,7 +71,7 @@ MainWindow::~MainWindow()
 
 void MainWindow::keyPressEvent(QKeyEvent *event)
 {
-    // tetromino moves to the right
+    // The tetromino moves to the right
     if ( event->key() == Qt::Key_N ) {
         qreal deltaX = STEP;
         qreal deltaY = 0;
@@ -92,7 +82,7 @@ void MainWindow::keyPressEvent(QKeyEvent *event)
         }
     }
 
-    // tetromino moves to the left
+    // The tetromino moves to the left
     if ( event->key() == Qt::Key_V ) {
         qreal deltaX = -STEP;
         qreal deltaY = 0;
@@ -102,6 +92,8 @@ void MainWindow::keyPressEvent(QKeyEvent *event)
             }
         }
     }
+
+    // The tetromino goes straight down
     if ( event->key() == Qt::Key_B ){
         qreal deltaX = 0;
         qreal deltaY = STEP;
@@ -113,40 +105,39 @@ void MainWindow::keyPressEvent(QKeyEvent *event)
     }
 }
 
-// Function draws and creates a new shape
 void MainWindow::set_shape()
 {
     if ( is_game_over() ){
         timer_.stop();
         clock_timer_.stop();
         ui->gameOverBrowser->setText("GAME OVER!!!");
-        //ui->gameOverBrowser->set(clock_);
 
     } else {
         ui->gameOverBrowser->setText("GOOD LUCK!!!");
 
         // The same shape always has the same color
-        int shape = distr(randomEng)%8;
-        QBrush colorBrush(allColors.at(shape));
+        int shape = distr(randomEng) % 8;
+        QBrush colorBrush(COLORS.at(shape));
         QPen grayPen(Qt::gray);
         grayPen.setWidth(2);
-
-        for (int i = 0; i < 4 ; i++){
-            int x = allShapes.at(shape).at(i).at(0);
-            int y = allShapes.at(shape).at(i).at(1);
-            QGraphicsRectItem* piece = scene_->addRect(0, 0, SQUARE_SIDE, SQUARE_SIDE, grayPen, colorBrush);
+        for ( int i = 0; i < 4 ; i++ ){
+            int x = SHAPES.at(shape).at(i).at(0);
+            int y = SHAPES.at(shape).at(i).at(1);
+            QGraphicsRectItem* piece = scene_->addRect(0, 0, SQUARE_SIDE,
+                                            SQUARE_SIDE, grayPen, colorBrush);
             piece->moveBy(x, y);
             tetromino_.push_back(piece);
         }
-        // Pisteen saa jokaisesta uudesta palikasta
+
+        // The player gets a point for each new tetromino
         points_ += 1;
         ui->pointsLabel->setNum(points_);
-        // vapautetaan hold nappi aina uuden palikan kohdalla
+
+        // Always release the holdButton for a new tetromino
         ui->holdButton->setDisabled(false);
     }
 }
 
-// The tetromino automatically moves downthe side of the square
 void MainWindow::tetromino_move()
 {   
     // Change in transition
@@ -159,14 +150,15 @@ void MainWindow::tetromino_move()
         }
         return;
     }
-    // jos ei pysty siirtää niin laitetaan griddiin ykkönen
+
+    // The number one is marked in the grid_ when the tetromino stops
     for ( QGraphicsRectItem* piece : tetromino_ ){
         int current_x = piece->x()/STEP;
         int current_y = piece->y()/STEP;
-        grid_.at(current_y).at(current_x) = 1;
+        grid_.at(current_y).at(current_x) = UNFREE;
     }
 
-    // peli nopeutuu
+    // The game speeds up with each new tetromino
     if ( speed_ > 20 ){
         speed_ -= 20;
         timer_.start(speed_);
@@ -175,7 +167,6 @@ void MainWindow::tetromino_move()
     set_shape();
 }
 
-// Function checks that is it possible to move the tetromino
 // Parameters:
 // deltaX = transfer with respect to the x-axis
 // deltaY = transfer with respect to the y-axis.
@@ -197,14 +188,13 @@ bool MainWindow::is_place_free(qreal deltaX, qreal deltaY )
         if ( not scene_->sceneRect().contains(current_x, current_y) ){
             return false;
         }
-        if ( grid_.at(y).at(x) == 1){
+        if ( grid_.at(y).at(x) == UNFREE){
             return false;
         }
     }
     return true;
 }
 
-// Playing time clock and the clock is running as the pieces move
 void MainWindow::clock_time()
 {
     seconds_ += 0.01;
@@ -219,31 +209,34 @@ void MainWindow::clock_time()
 
 void MainWindow::create_grid()
 {
-   vector<int> row;
+   vector<int> colums;
 
-   // asetetaan jokaiselle riville nolla
-   for ( int x = 0; x <= BORDER_RIGHT/STEP; x++ ){
-       row.push_back(0);
+   // Set to zero at each place
+   for ( int x = 0; x <= COLUMNS; x++ ){
+       colums.push_back(0);
    }
-   // rivejä ony-akselin verran
-   for ( int y = 0; y <= BORDER_DOWN/STEP; y++ ){
-       grid_.push_back(row);
+   for ( int y = 0; y <= ROWS; y++ ){
+       grid_.push_back(colums);
    }
 }
 
+// Return:
+// true = the game is over
+// false = the game can continue
 bool MainWindow::is_game_over()
 {
-    for ( int alkio : grid_.at(1) ){
-        if ( alkio == 1 ){
+    for ( int place : grid_.at(1) ){
+        if ( place == UNFREE ){
             return true;
         }
     }
     return false;
 }
 
-// Tetrominos move faster than in normal game
+// Function starts a new hard game
 void MainWindow::on_startHardButton_clicked()
 {
+    // Tetrominos move faster than in normal game
     speed_ = HARD;
     timer_.start(speed_);
     clock_timer_.start(NORMAL);
@@ -254,9 +247,10 @@ void MainWindow::on_startHardButton_clicked()
     ui->startNormalButton->setDisabled(true);
 }
 
-// Tetrominos move slower than in hard game
+// Function starts a new normal game
 void MainWindow::on_startNormalButton_clicked()
 {
+    // Tetrominos move slower than in hard game
     speed_ = NORMAL;
     timer_.start(speed_);
     clock_timer_.start(NORMAL);
@@ -267,23 +261,36 @@ void MainWindow::on_startNormalButton_clicked()
     ui->startNormalButton->setDisabled(true);
 }
 
-// The tetromino stops and the holdButton can't be pressed until the nest tetromino
+// The tetromino stops and the holdButton can't be pressed
+// until the next tetromino
 void MainWindow::on_holdButton_clicked()
 {
     timer_.stop();
     ui->holdButton->setDisabled(true);
 }
 
-// Function continue game
+// Function continue game after holdButton
 void MainWindow::on_continueButton_clicked()
 {
     timer_.start(speed_);
 }
 
+// Function clears the scene and allows a new game
 void MainWindow::on_newGameButton_clicked()
 {
     scene_->clear();
+    tetromino_.clear();
+    grid_.clear();
     clock_timer_.stop();
-    //points_ = 0;
-    ui->gameOverBrowser->setText("Choose which game you start!");
+    points_ = 0;
+    minutes_ = 0.00;
+    seconds_ = 0.00;
+    clock_ = minutes_ + seconds_;
+    ui->lcdNumberClock->display(clock_);
+    ui->pointsLabel->setNum(points_);
+    ui->gameOverBrowser->setText("Choose which game you want start!");
+
+    ui->startHardButton->setDisabled(false);
+    ui->startNormalButton->setDisabled(false);
+    ui->holdButton->setDisabled(false);
 }

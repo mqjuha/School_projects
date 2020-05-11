@@ -145,7 +145,7 @@
      </rect>
     </property>
     <property name="text">
-     <string>Satrt New Game</string>
+     <string>Start New Game</string>
     </property>
    </widget>
    <widget class="QTextBrowser" name="infoTextBrowser">

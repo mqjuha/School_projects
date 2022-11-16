@@ -1,0 +1,8 @@
+#ifndef INSTRUCTIONS_TXT
+#define INSTRUCTIONS_TXT
+
+#endif // INSTRUCTIONS_T
+
+ 
+ This program saves universitys and students data.
+ Also searches univerity's, student's and course's information.

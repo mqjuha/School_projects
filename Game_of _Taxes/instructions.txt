@@ -1,0 +1,9 @@
+#ifndef INSTRUCTIONS_TXT
+#define INSTRUCTIONS_TXT
+
+#endif // INSTRUCTIONS_T
+
+Information about cities is entered into the program (name and coordinates and 
+taxation), and the program can be asked for cities in the desired order as well 
+as minimum and maximum information. You can also ask about the city's taxation relations
+and taxation.

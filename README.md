@@ -1,3 +1,7 @@
-Ohjelmointi 2: Perusteet / Programming 2: Basics
+Courses and their projects:
+
+Ohjelmointi 2 / Programming 2
 - tetris
 - university
+
+Ohjelmointi 3 / Programming 

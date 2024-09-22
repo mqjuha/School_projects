@@ -1,0 +1,331 @@
+{
+  "users": [
+    {
+      "id": "e5253a00def511ee9238e1dad5402f87",
+      "name": "Admin",
+      "email": "admin@email.com",
+      "password": "$2a$10$Dy6rDOx5zGgCdG.W6q4nwesZXhe67/rOCbNerO9oBoeGWG8BrZ/fu",
+      "role": "admin"
+    },
+    {
+      "id": "e55faaf0def511ee9238e1dad5402f87",
+      "name": "Admin2",
+      "email": "admin2@email.com",
+      "password": "$2a$10$AieW3.4ULBMZ3aCxtBIc3OUi2cCHc4/JQNGTOfxc7xF.PS7V3Q37i",
+      "role": "admin"
+    },
+    {
+      "id": "e57ccfe0def511ee9238e1dad5402f87",
+      "name": "Customer2",
+      "email": "customer2@email.com",
+      "password": "$2a$10$LlknW9vpV5o1qK.NNghwXemtj9203m3nmcPZpdQezQ6uJi8u5zfy6",
+      "role": "customer"
+    },
+    {
+      "id": "e59adf30def511ee9238e1dad5402f87",
+      "name": "Admin3",
+      "email": "admin3@email.com",
+      "password": "$2a$10$ekDawnDqo72fvozRPIwYkuza.7tmvjs5kzGQV7/CpZ5TFJlKwYhUi",
+      "role": "admin"
+    },
+    {
+      "id": "e5bdf790def511ee9238e1dad5402f87",
+      "name": "Customer3",
+      "email": "customer3@email.com",
+      "password": "$2a$10$viGgEyCFx4cfwPBaH6RzX.hk7lMP/Ivt/UHiNf3LFt16.94z9y6c2",
+      "role": "customer"
+    },
+    {
+      "id": "e5db4390def511ee9238e1dad5402f87",
+      "name": "Admin4",
+      "email": "admin4@email.com",
+      "password": "$2a$10$l38rwBlp1l2jGgTsfxQ.quDu7PI8ybeKc1jXLirtUwsF4QLGZxXni",
+      "role": "admin"
+    },
+    {
+      "id": "e5ff6d60def511ee9238e1dad5402f87",
+      "name": "Customer4",
+      "email": "customer4@email.com",
+      "password": "$2a$10$CBisRUbxezaL9tD0Y2Ig..iaMB9OEds77OaXHyP8LJvjJIAKswsDy",
+      "role": "customer"
+    },
+    {
+      "id": "e61eb530def511ee9238e1dad5402f87",
+      "name": "Admin5",
+      "email": "admin5@email.com",
+      "password": "$2a$10$/o4TyPA8a19TktyFtc7FP.yt/YfAb0nv/bEJL485y8mS2xlaJeNZG",
+      "role": "admin"
+    },
+    {
+      "id": "e63b64f0def511ee9238e1dad5402f87",
+      "name": "Customer5",
+      "email": "customer5@email.com",
+      "password": "$2a$10$z.4/1S2TATx0LHaQHvGnTuhR2VyB8QTwPV60/BM6H2IiXsTxiUf1.",
+      "role": "customer"
+    },
+    {
+      "id": "e5428600def511ee9238e1dad5402f87",
+      "name": "Customer",
+      "email": "customer@email.com",
+      "password": "$2a$10$y3Y4AF6rm3IkAZYxK2MYYO5vpE858WFw8TWkdS45GGku6M9h3s31i",
+      "role": "customer"
+    }
+  ],
+  "products": [
+    {
+      "id": "e64bdfb0def511ee9238e1dad5402f87",
+      "name": "Fantastic Cotton Chair",
+      "price": 102,
+      "image": "http://placeimg.com/640/480/nature",
+      "description": "The Football Is Good For Training And Recreational Purposes"
+    },
+    {
+      "id": "e64c54e0def511ee9238e1dad5402f87",
+      "name": "Lovely Marble Car",
+      "price": 909,
+      "image": "http://placeimg.com/640/480/city",
+      "description": "The beautiful range of Apple Naturalé that has an exciting mix of natural ingredients. With the Goodness of 100% Natural Ingredients"
+    },
+    {
+      "id": "e64e77c0def511ee9238e1dad5402f87",
+      "name": "Sleek Plastic Hat",
+      "price": 62.25,
+      "image": "http://placeimg.com/640/480/city",
+      "description": "The automobile layout consists of a front-engine design, with transaxle-type transmissions mounted at the rear of the engine and four wheel drive"
+    },
+    {
+      "id": "e64eecf0def511ee9238e1dad5402f87",
+      "name": "Awesome Wooden Shoes",
+      "price": 4.99,
+      "image": "http://placeimg.com/640/480/food",
+      "description": "Andy shoes are designed to keeping in mind durability as well as trends, the most stylish range of shoes & sandals"
+    },
+    {
+      "id": "e64f6220def511ee9238e1dad5402f87",
+      "name": "Small Cotton Chicken",
+      "price": 173.99,
+      "image": "http://placeimg.com/640/480/fashion",
+      "description": "The automobile layout consists of a front-engine design, with transaxle-type transmissions mounted at the rear of the engine and four wheel drive"
+    },
+    {
+      "id": "e6522140def511ee9238e1dad5402f87",
+      "name": "Ergonomic Metal Cheese",
+      "price": 83.1,
+      "image": "http://placeimg.com/640/480/transport",
+      "description": "The Nagasaki Lander is the trademarked name of several series of Nagasaki sport bikes, that started with the 1984 ABC800J"
+    },
+    {
+      "id": "e65359c0def511ee9238e1dad5402f87",
+      "name": "Ergonomic Granite Duck",
+      "price": 729,
+      "image": "http://placeimg.com/640/480/business",
+      "description": "Ergonomic executive chair upholstered in bonded black leather and PVC padded seat and back for all-day comfort and support"
+    },
+    {
+      "id": "e6544420def511ee9238e1dad5402f87",
+      "name": "Beautiful Frozen Salad",
+      "price": 0.75,
+      "image": "http://placeimg.com/640/480/fashion",
+      "description": "Carbonite web goalkeeper gloves are ergonomically designed to give easy fit"
+    },
+    {
+      "id": "e654e060def511ee9238e1dad5402f87",
+      "name": "Ergonomic Plastic Bike",
+      "price": 56,
+      "image": "http://placeimg.com/640/480/city",
+      "description": "Ergonomic executive chair upholstered in bonded black leather and PVC padded seat and back for all-day comfort and support"
+    },
+    {
+      "id": "e655cac0def511ee9238e1dad5402f87",
+      "name": "Generic Cotton Chips",
+      "price": 1351,
+      "image": "http://placeimg.com/640/480/food",
+      "description": "New range of formal shirts are designed keeping you in mind. With fits and styling that will make you stand apart"
+    },
+    {
+      "id": "e6566700def511ee9238e1dad5402f87",
+      "name": "Incredible Wooden Towels",
+      "price": 97,
+      "image": "http://placeimg.com/640/480/cats",
+      "description": "New ABC 13 9370, 13.3, 5th Gen CoreA5-8250U, 8GB RAM, 256GB SSD, power UHD Graphics, OS 10 Home, OS Office A & J 2016"
+    },
+    {
+      "id": "e656dc30def511ee9238e1dad5402f87",
+      "name": "Tasty Granite Gloves",
+      "price": 480,
+      "image": "http://placeimg.com/640/480/technics",
+      "description": "The beautiful range of Apple Naturalé that has an exciting mix of natural ingredients. With the Goodness of 100% Natural Ingredients"
+    },
+    {
+      "id": "e6575160def511ee9238e1dad5402f87",
+      "name": "Practical Steel Chicken",
+      "price": 886,
+      "image": "http://placeimg.com/640/480/sports",
+      "description": "The Nagasaki Lander is the trademarked name of several series of Nagasaki sport bikes, that started with the 1984 ABC800J"
+    },
+    {
+      "id": "e657c690def511ee9238e1dad5402f87",
+      "name": "Handcrafted Metal Mouse",
+      "price": 567,
+      "image": "http://placeimg.com/640/480/business",
+      "description": "Carbonite web goalkeeper gloves are ergonomically designed to give easy fit"
+    },
+    {
+      "id": "e6583bc0def511ee9238e1dad5402f87",
+      "name": "Sleek Metal Fish",
+      "price": 171,
+      "image": "http://placeimg.com/640/480/sports",
+      "description": "The Apollotech B340 is an affordable wireless mouse with reliable connectivity, 12 months battery life and modern design"
+    },
+    {
+      "id": "e658ff10def511ee9238e1dad5402f87",
+      "name": "Awesome Cotton Computer",
+      "price": 137,
+      "image": "http://placeimg.com/640/480/animals",
+      "description": "New ABC 13 9370, 13.3, 5th Gen CoreA5-8250U, 8GB RAM, 256GB SSD, power UHD Graphics, OS 10 Home, OS Office A & J 2016"
+    },
+    {
+      "id": "e65b9720def511ee9238e1dad5402f87",
+      "name": "Practical Plastic Mouse",
+      "price": 566,
+      "image": "http://placeimg.com/640/480/food",
+      "description": "Carbonite web goalkeeper gloves are ergonomically designed to give easy fit"
+    },
+    {
+      "id": "e65c5a70def511ee9238e1dad5402f87",
+      "name": "Flammable Plastic Gloves",
+      "price": 795,
+      "image": "http://placeimg.com/640/480/city",
+      "description": "Ergonomic executive chair upholstered in bonded black leather and PVC padded seat and back for all-day comfort and support"
+    },
+    {
+      "id": "e65cf6b0def511ee9238e1dad5402f87",
+      "name": "Intelligent Concrete Salad",
+      "price": 789,
+      "image": "http://placeimg.com/640/480/fashion",
+      "description": "The Apollotech B340 is an affordable wireless mouse with reliable connectivity, 12 months battery life and modern design"
+    },
+    {
+      "id": "e65d6be0def511ee9238e1dad5402f87",
+      "name": "Rustic Metal Shoes",
+      "price": 309,
+      "image": "http://placeimg.com/640/480/cats",
+      "description": "New ABC 13 9370, 13.3, 5th Gen CoreA5-8250U, 8GB RAM, 256GB SSD, power UHD Graphics, OS 10 Home, OS Office A & J 2016"
+    },
+    {
+      "id": "e65de110def511ee9238e1dad5402f87",
+      "name": "Generic Granite Sausages",
+      "price": 37.3,
+      "image": "http://placeimg.com/640/480/sports",
+      "description": "The Football Is Good For Training And Recreational Purposes"
+    },
+    {
+      "id": "e65e5640def511ee9238e1dad5402f87",
+      "name": "Gorgeous Metal Towels",
+      "price": 93,
+      "image": "http://placeimg.com/640/480/nature",
+      "description": "Carbonite web goalkeeper gloves are ergonomically designed to give easy fit"
+    },
+    {
+      "id": "e65f1990def511ee9238e1dad5402f87",
+      "name": "Awesome Soft Towels",
+      "price": 444,
+      "image": "http://placeimg.com/640/480/sports",
+      "description": "The automobile layout consists of a front-engine design, with transaxle-type transmissions mounted at the rear of the engine and four wheel drive"
+    },
+    {
+      "id": "e65f8ec0def511ee9238e1dad5402f87",
+      "name": "Unbranded Soft Table",
+      "price": 8,
+      "image": "http://placeimg.com/640/480/animals",
+      "description": "Carbonite web goalkeeper gloves are ergonomically designed to give easy fit"
+    },
+    {
+      "id": "e6607920def511ee9238e1dad5402f87",
+      "name": "Sleek Wooden Hat",
+      "price": 748,
+      "image": "http://placeimg.com/640/480/sports",
+      "description": "New ABC 13 9370, 13.3, 5th Gen CoreA5-8250U, 8GB RAM, 256GB SSD, power UHD Graphics, OS 10 Home, OS Office A & J 2016"
+    },
+    {
+      "id": "78728500defc11ee854f43e933cdd23a",
+      "name": "TESTI",
+      "price": 10,
+      "description": "TESTI"
+    },
+    {
+      "id": "868e4660defc11ee854f43e933cdd23a",
+      "name": "TESTI2",
+      "price": 1,
+      "description": "TESTI2"
+    }
+  ],
+  "orders": [
+    {
+      "id": "68364d40deff11ee854f43e933cdd23a",
+      "items": [
+        {
+          "product": {
+            "id": "e64bdfb0def511ee9238e1dad5402f87",
+            "name": "Fantastic Cotton Chair",
+            "price": 102,
+            "description": "The Football Is Good For Training And Recreational Purposes"
+          },
+          "quantity": 4
+        },
+        {
+          "product": {
+            "id": "e64c54e0def511ee9238e1dad5402f87",
+            "name": "Lovely Marble Car",
+            "price": 909,
+            "description": "The beautiful range of Apple Naturalé that has an exciting mix of natural ingredients. With the Goodness of 100% Natural Ingredients"
+          },
+          "quantity": 1
+        },
+        {
+          "product": {
+            "id": "e64e77c0def511ee9238e1dad5402f87",
+            "name": "Sleek Plastic Hat",
+            "price": 62.25,
+            "description": "The automobile layout consists of a front-engine design, with transaxle-type transmissions mounted at the rear of the engine and four wheel drive"
+          },
+          "quantity": 4
+        },
+        {
+          "product": {
+            "id": "e64eecf0def511ee9238e1dad5402f87",
+            "name": "Awesome Wooden Shoes",
+            "price": 4.99,
+            "description": "Andy shoes are designed to keeping in mind durability as well as trends, the most stylish range of shoes & sandals"
+          },
+          "quantity": 1
+        }
+      ],
+      "customerId": "e57ccfe0def511ee9238e1dad5402f87"
+    },
+    {
+      "id": "6dd73070deff11ee854f43e933cdd23a",
+      "items": [
+        {
+          "product": {
+            "id": "e64eecf0def511ee9238e1dad5402f87",
+            "name": "Awesome Wooden Shoes",
+            "price": 4.99,
+            "description": "Andy shoes are designed to keeping in mind durability as well as trends, the most stylish range of shoes & sandals"
+          },
+          "quantity": 2
+        },
+        {
+          "product": {
+            "id": "e64f6220def511ee9238e1dad5402f87",
+            "name": "Small Cotton Chicken",
+            "price": 173.99,
+            "description": "The automobile layout consists of a front-engine design, with transaxle-type transmissions mounted at the rear of the engine and four wheel drive"
+          },
+          "quantity": 2
+        }
+      ],
+      "customerId": "e57ccfe0def511ee9238e1dad5402f87"
+    }
+  ]
+}

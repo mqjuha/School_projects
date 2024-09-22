@@ -1,0 +1,62 @@
+.persons {
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+    margin-bottom: 5px;
+}
+
+.person-section {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    background-color: var(--foreground);
+    color: var(--background);
+    padding: 20px;
+}
+
+.side {
+    flex: 1;
+    padding: 10px;
+}
+
+.person-img {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    margin: 0;
+}
+
+.person-content {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    text-align: center;
+    gap: 20px;
+}
+
+.person_header {
+    font-size: xx-large;
+}
+
+.contact-info-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 100%x;
+    gap: 10px;
+}
+
+.link {
+    color: dodgerblue;
+}
+
+@media only screen and (max-width: 768px) {
+    /*For mobile phones:*/
+
+    .person-section {
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        text-align: center;
+    }
+}

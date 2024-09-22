@@ -1,0 +1,33 @@
+.filter-section {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+    height: fit-content;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    background-color: var(--background);
+}
+
+.filters {
+    display: flex;
+    flex-direction: row;
+    justify-content: left;
+    width: 50%;
+    height: fit-content;
+}
+
+.filter {
+    width: 50%;
+    margin-left: 20px;
+}
+
+.sort {
+    width: 20%;
+    margin-right: 20px;
+}
+
+.item {
+    color: var(--background);
+
+}

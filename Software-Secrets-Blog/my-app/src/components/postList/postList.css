@@ -1,0 +1,22 @@
+.list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    margin: 20px;
+
+}
+
+
+@media only screen and (max-width: 768px) {
+    /*For mobile phones:*/
+
+    .list {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: 20px;
+        margin: 20px;
+
+    }
+}

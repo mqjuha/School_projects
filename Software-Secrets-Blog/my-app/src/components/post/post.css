@@ -1,0 +1,48 @@
+.post {
+    max-width: 30%;
+    min-width: 340px;
+    padding: 20px;
+
+    border: 5px;
+    border-style: solid;
+    border-color: var(--primary);
+
+    .link {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+
+        color: var(--foreground);
+        text-decoration: none;
+
+        .image {
+            display: flex;
+            flex-direction: column;
+            max-width: 200px;
+
+            .img {
+                object-fit: cover;
+            }
+        }
+
+        .text {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            text-align: center;
+            gap: 10px;
+        }
+
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    /*For mobile phones:*/
+
+    .post {
+        max-width: 100%;
+        min-width: none;
+    }
+}
+

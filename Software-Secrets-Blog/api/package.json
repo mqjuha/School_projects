@@ -1,0 +1,33 @@
+{
+  "name": "software-secrets-blog",
+  "version": "1.0.0",
+  "description": "Software Secrets Blog provides knowledge and tips about software engineering.",
+  "main": "index.js",
+  "scripts": {
+    "build": "nodemon index.js ",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mqjuha/Software-Secrets-Blog.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mqjuha/Software-Secrets-Blog/issues"
+  },
+  "homepage": "https://github.com/mqjuha/Software-Secrets-Blog#readme",
+  "dependencies": {
+    "concurrently": "^8.2.1",
+    "@emailjs/browser": "^3.11.0",
+    "@mui/lab": "^5.0.0-alpha.145",
+    "cors": "^2.8.5",
+    "express": "^4.18.2",
+    "mongodb": "^5.7.0",
+    "mongoose": "^7.4.2",
+    "nodemon": "^3.0.1"
+  },
+  "devDependencies": {
+    "webpack-cli": "^5.1.4"
+  }
+}

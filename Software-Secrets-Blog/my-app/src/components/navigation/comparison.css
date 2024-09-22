@@ -1,0 +1,80 @@
+.comparison {
+    display: flex;
+    justify-content: center;
+    height: fit-content;
+    padding: 50px;
+
+}
+.container {
+    position: relative;
+    height: 40vh;
+    max-height: 50vw;
+    aspect-ratio: 1/1;
+
+    .circle {
+        position: absolute;
+
+        width: 100%;
+        aspect-ratio: 1/1;
+
+        border-radius: 50%;
+        border: 5px;
+        border-style: solid;
+        border-color: var(--primary);
+
+        .textbox {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+
+            position: absolute;
+
+            width: 40%;
+            height: 40%;
+        }
+    }
+
+    .first {
+        right: 25%;
+        top: 0;
+
+        .textbox {
+            left: 10%;
+            top: 15%;
+        }
+    }
+
+    .second {
+        left: 25%;
+        top: 0;
+
+        .textbox {
+            right: 10%;
+            top: 15%;
+        }
+    }
+
+    .third {
+        top: 30%;
+
+        .textbox {
+            top: 55%;
+            left: 30%;
+        }
+    }
+}
+
+.higher {
+    height: 60vh;
+    max-height: 50vw;
+    aspect-ratio: 2/3;
+}
+
+@media only screen and (max-width: 768px) {
+    /*For mobile phones:*/
+
+    .box-context {
+        display: none;
+    }
+}

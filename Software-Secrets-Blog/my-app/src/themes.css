@@ -1,0 +1,30 @@
+:root{
+    --background: #faf9f0;
+    --foreground: #13232f;
+    --font: #13232f;
+    --primary_r: #cb1505;
+    --primary_b: #2034ba;
+    --primary_y: #f3bc23;
+    --secondary: #d1d1d1;
+}
+
+.red-theme {
+    --primary: #cb1505;
+}
+
+.blue-theme {
+    --primary: #2034ba;
+}
+
+.yellow-theme {
+    --primary: #f3bc23;
+}
+
+.button {
+    background-color: var(--foreground);
+    color: var(--background);
+}
+
+.font {
+    color: var(--font);
+}

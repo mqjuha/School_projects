@@ -1,0 +1,85 @@
+.timeline-section {
+	width: 100%;
+	height: 200px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	overflow: auto;
+}
+
+.timeline {
+	margin-top: 50px;
+    height: 4px;
+    background-color: var(--primary);
+	width: 80%;
+}
+
+.progress {
+	width: 0;
+	height: 100%;
+	background-color: var(--primary);
+}
+
+.timeline-items {
+	margin-left: -10px;
+	margin-right: -10px;
+	margin-top: -12px;
+	display: flex;
+	justify-content: space-between;
+	color: var(--background);
+}
+
+.timeline-item {
+	position: relative;
+}
+
+.timeline-item::before {
+	content: '';
+	width: 20px;
+	height: 20px;
+	background-color: var(--primary);
+	display: block;
+	border-radius: 100%;
+}
+
+.timeline-content {
+	position: absolute;
+	top: 30px;
+	left: 50%;
+	transform: translateX(-50%);
+	background-color: var(--foreground);
+	width: fit-content;
+	padding: 5px 10px;
+	border-radius: 5px;
+	text-align: center;
+}
+
+.timeline-content::before {
+	content: '';
+	width: 10px;
+	height: 10px;
+	background-color: var(--foreground);
+	display: block;
+	position: absolute;
+	top: -8px;
+	margin-left: -2px;
+	left: 50%;
+	transform: rotate(-45deg) translateX(-50%);
+}
+
+.timeline-item.active::before {
+	background-color: var(--primary);
+}
+
+.timeline-item.active .timeline-content {
+	color: #fff;
+	background-color: var(--foreground);
+}
+
+.timeline-item.active .timeline-content::before {
+	background-color: var(--foreground);
+}
+
+.timeline-hor-link {
+	color: var(--background);
+}

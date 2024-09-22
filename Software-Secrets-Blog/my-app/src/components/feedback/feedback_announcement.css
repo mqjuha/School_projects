@@ -1,0 +1,38 @@
+.info-section {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+    margin-top: 0px;
+    margin-bottom: 50px;
+    background-color: var(--foreground);
+    padding: 10px;
+    padding-left: 20px;
+    padding-right: 20px;
+    gap: 10px;
+}
+
+.feedback-info-content {
+    color: var(--background);
+    align-items: center;
+    text-align: center;
+    margin: 10px;
+}
+
+.feedback-header {
+    text-align: center;
+    margin: 0px;
+}
+
+.left-text {
+    display: inline;
+    align-items: left;
+}
+
+.right-text {
+    display: inline;
+    align-items: right;
+    color: dodgerblue;
+    font-size: 20px;
+    margin-left: 10px;
+}
